@@ -13,7 +13,7 @@ import PersonTv from "./Components/PersonTv";
 import PersonMedia from "./Components/PersonMedia";
 import MovieDetailsLoader from "../MovieDetails/Loaders/MovieDetailsLoader";
 import PersonSocials from "./Components/PersonSocials";
-import  {SideBarContext}  from "../Main";
+import { SideBarContext } from "../Main";
 
 const tabs = ["Movies", "Tv", "Media", "Socials"];
 
@@ -65,16 +65,13 @@ const PersonDetails = () => {
       <div className="flex flex-col w-full h-full">
         <div className="flex pl-14 mt-10">
           <Breadcrumbs>
-            <Link to={"/persons"}>
-              <Breadcrumb label="Persons" />
-            </Link>
             <Breadcrumb label={data?.name} />
           </Breadcrumbs>
         </div>
         <PersonInfo person={data} />
         {/* Tabs */}
         <div className="flex items-center mb-6 w-full justify-center">
-          <div className="tabs tabs-boxed w-10/12 flex items-center justify-between h-16 rounded-3xl px-5 bg-slate-300 dark:bg-slate-700">
+          <div className="tabs tabs-boxed w-full mr-4 ml-2 md:mx-0 md:w-10/12 flex items-center justify-between h-16 rounded-3xl px-5 bg-slate-300 dark:bg-slate-700">
             {tabs.map((tab, index) => (
               <span
                 key={index}
@@ -99,8 +96,8 @@ const PersonDetails = () => {
                 }}
                 className={
                   selectedTab === index
-                    ? "tabs tab-active w-28 h-10 items-center bg-amber-400 cursor-pointer justify-center font-medium  text-white tracking-wide rounded-2xl transform hover:scale-95 transition duration-500 ease-in-out"
-                    : "tabs w-28 h-10 items-center justify-center font-medium text-white hover:text-gray-500 cursor-pointer tracking-wide"
+                    ? "tabs tab-active w-20 md:w-28 h-10 items-center bg-amber-400 cursor-pointer justify-center font-medium  text-white tracking-wide rounded-2xl transform hover:scale-95 transition duration-500 ease-in-out"
+                    : "tabs w-20 md:w-28 h-10 items-center justify-center font-medium text-white hover:text-gray-500 cursor-pointer tracking-wide"
                 }
               >
                 {tab}

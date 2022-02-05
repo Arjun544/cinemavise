@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getMovieById, getMovieMediaById } from "../../Api/MoviesApi";
 import {
+  MdClose,
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
@@ -20,6 +21,7 @@ const tabs = ["Cast", "Media", "Similar", "Reviews"];
 
 const MovieDetails = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
   const params = useParams();
   const movieId = params.id;
   const { isSdeBarExpanded, setisSideBarExpanded } = useContext(SideBarContext);
@@ -83,24 +85,39 @@ const MovieDetails = () => {
         </i>
       </div>
       <div className="flex flex-col w-full h-full">
-        <div className="flex pl-14 mt-10">
-          <Breadcrumbs>
-            <Link to={"/movies"}>
-              <Breadcrumb label="Movies" />
-            </Link>
-            <Breadcrumb label={movie?.original_title} />
-          </Breadcrumbs>
+        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-14 mt-10">
+          <div className="flex items-center">
+            <Breadcrumbs>
+              <Link to={"/movies"}>
+                <Breadcrumb label="Movies" />
+              </Link>
+              <Breadcrumb label={movie?.original_title} />
+            </Breadcrumbs>
+          </div>
+          {/* Trailer playing icon */}
+          {isTrailerPlaying && (
+            <div
+              onClick={() => setIsTrailerPlaying(!isTrailerPlaying)}
+              className="flex items-center cursor-pointer mr-6"
+            >
+              <MdClose fontSize={24} />
+              <span className="text-sm text-black">Close Trailer</span>
+            </div>
+          )}
         </div>
+
         <MovieInfo
           movie={movie}
           trailer={media?.filter(
             (item) =>
               item.type === "Trailer" && item.name === "Official Trailer"
           )}
+          isTrailerPlaying={isTrailerPlaying}
+          setIsTrailerPlaying={setIsTrailerPlaying}
         />
         {/* Tabs */}
         <div className="flex items-center mb-6 w-full justify-center">
-          <div className="tabs tabs-boxed w-10/12 flex items-center justify-between h-16 rounded-3xl px-5 bg-slate-300 dark:bg-gray-700">
+          <div className="tabs tabs-boxed w-full mr-4 ml-2 md:mx-0 md:w-10/12 flex items-center justify-between h-16 rounded-3xl px-5 bg-slate-300 dark:bg-gray-700">
             {tabs.map((tab, index) => (
               <span
                 key={index}
@@ -125,8 +142,8 @@ const MovieDetails = () => {
                 }}
                 className={
                   selectedTab === index
-                    ? "tabs tab-active w-28 h-10 items-center bg-amber-400 cursor-pointer justify-center font-medium  text-white tracking-wide rounded-2xl transform hover:scale-95 transition duration-500 ease-in-out"
-                    : "tabs w-28 h-10 items-center justify-center font-medium text-white hover:text-gray-500 cursor-pointer tracking-wide"
+                    ? "tabs tab-active w-20 md:w-28 h-10 items-center bg-amber-400 cursor-pointer justify-center font-medium  text-white tracking-wide rounded-2xl transform hover:scale-95 transition duration-500 ease-in-out"
+                    : "tabs w-20 md:w-28 h-10 items-center justify-center font-medium text-white hover:text-gray-500 cursor-pointer tracking-wide"
                 }
               >
                 {tab}

@@ -97,7 +97,7 @@ const TopRated = ({ tabs }) => {
       ) : (
         <div className="flex flex-col my-6 ml-6">
           <Masonry
-            className=" flex animate-slide-fwd w-full"
+            className=" flex animate-slide-fwd w-full "
             breakpointCols={{
               default: 4,
               3000: 8,

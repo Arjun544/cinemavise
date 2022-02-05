@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
-import { RiMovie2Fill } from "react-icons/ri";
+import {
+  RiLoginCircleLine,
+  RiLogoutCircleRLine,
+  RiMovie2Fill,
+} from "react-icons/ri";
 import NavItem from "./NavItem";
 import useDarkMode from "../Hooks/useDarkMode";
 import { sideBarItems } from "../Constants/constants";
 import { SideBarContext } from "../Pages/Main";
-import { UserContext } from "../App";   
+import { UserContext } from "../App";
 
 const SideBar = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -62,35 +66,81 @@ const SideBar = () => {
         }`}
       >
         {/* Sign in & Profile */}
-        <div
-          className={`${
-            isSideBarExpanded ? "visible" : "invisible"
-          } flex w-full h-24 rounded-xl items-center justify-around bg-amber-200 shadow-md hover:scale-95 transition-all duration-500 ease-in-out`}
-        >
-          <div className="flex flex-col justify-around gap-2">
-            <span className="font-semibold  text-black tracking-widest capitalize">
-              {currentUser.isLogin ? currentUser.username : "Explore more"}
-            </span>
-            <Link
-              to={!currentUser.isLogin && "/login"}
-              onClick={() => handleLogout()}
-            >
-              <span
-                className={`font-semibold text-sm w-fit ${
-                  currentUser.isLogin ? "text-red-500" : "text-green-500"
-                } tracking-wider hover:bg-slate-200 cursor-pointer hover:px-4 hover:py-1 hover:rounded-md transition-all duration-500 ease-in-out`}
-              >
-                {currentUser.isLogin ? "Logout" : "Sign in"}
+        {isSideBarExpanded && (
+          <div
+            className={`${
+              isSideBarExpanded ? "visible" : "invisible"
+            } invisible lg:visible flex w-full h-24 rounded-xl items-center justify-around bg-amber-200 shadow-md hover:scale-95 transition-all duration-500 ease-in-out`}
+          >
+            <div className="flex flex-col justify-around gap-2">
+              <span className="font-semibold  text-black tracking-widest capitalize">
+                {currentUser.isLogin ? currentUser.username : "Explore more"}
               </span>
-            </Link>
+              <Link
+                to={!currentUser.isLogin && "/login"}
+                onClick={() => handleLogout()}
+              >
+                <span
+                  className={`font-semibold text-sm w-fit ${
+                    currentUser.isLogin ? "text-red-500" : "text-green-500"
+                  } tracking-wider hover:bg-slate-200 cursor-pointer hover:px-4 hover:py-1 hover:rounded-md transition-all duration-500 ease-in-out`}
+                >
+                  {currentUser.isLogin ? "Logout" : "Sign in"}
+                </span>
+              </Link>
+            </div>
+            <div className="flex">
+              <img
+                className="h-20 w-20"
+                src="/atom.png"
+                alt=""
+                color={"#fff"}
+              />
+            </div>
           </div>
-          <div className="flex">
-            <img className="h-20 w-20" src="/atom.png" alt="" color={"#fff"} />
+        )}
+        {/* large screens loign in & logout when side is closed*/}
+        {!isSideBarExpanded && (
+          <Link
+            to={!currentUser.isLogin && "/login"}
+            onClick={() => handleLogout()}
+          >
+            <div
+              className={`flex lg:flex lg:visible h-10 w-10 ${
+                currentUser.isLogin ? "bg-red-500" : "bg-green-500"
+              } items-center justify-center rounded-full`}
+            >
+              {currentUser.isLogin ? (
+                <RiLogoutCircleRLine className="fill-white" fontSize={20} />
+              ) : (
+                <RiLoginCircleLine className="fill-white" fontSize={20} />
+              )}
+            </div>
+          </Link>
+        )}
+        {/* small screens loign in & logout when side is open*/}
+        <Link
+          to={!currentUser.isLogin && "/login"}
+          onClick={() => handleLogout()}
+        >
+          <div
+            className={`${
+              !isSideBarExpanded && "hidden"
+            } flex lg:hidden h-10 w-10 ${
+              currentUser.isLogin ? "bg-red-500" : "bg-green-500"
+            } dark:bg-slate-700 items-center justify-center rounded-full`}
+          >
+            {currentUser.isLogin ? (
+              <RiLogoutCircleRLine className="fill-white" fontSize={20} />
+            ) : (
+              <RiLoginCircleLine className="fill-white" fontSize={20} />
+            )}
           </div>
-        </div>
-        {/* Theme toggle */}
+        </Link>
+
+        {/* Theme toggle large screens */}
         {isSideBarExpanded ? (
-          <div className="flex mt-8">
+          <div className="hidden lg:flex mt-8 lg:visible">
             <div className="tabs tabs-boxed px-3 flex w-full bg-gray-100 dark:bg-gray-700 items-center justify-between h-12 rounded-full cursor-pointer">
               <a
                 href="0"
@@ -129,17 +179,23 @@ const SideBar = () => {
         ) : (
           <div
             onClick={() => setTheme(colorTheme)}
-            className="flex items-center justify-center h-10 w-10 bg-gray-100 rounded-full cursor-pointer"
+            className="hidden lg:flex mt-8 lg:visible items-center justify-center h-10 w-10 bg-gray-100 dark:bg-slate-700 rounded-full cursor-pointer"
           >
-            <div className="flex items-center justify-center h-8 w-8 bg-white rounded-full">
-              {colorTheme === "light" ? (
-                <i>{<BsSunFill color="#000" />}</i>
-              ) : (
-                <i>{<BsMoonFill color="#000" />}</i>
-              )}
+            <div className="flex items-center justify-center h-8 w-8 bg-white dark:bg-slate-500 rounded-full">
+              <i>{<BsSunFill className="fill-black dark:fill-white" />}</i>
             </div>
           </div>
         )}
+
+        {/* theme toggle small screens */}
+        <div
+          onClick={() => setTheme(colorTheme)}
+          className="visible lg:hidden flex items-center justify-center h-10 w-10 mt-4 bg-gray-100 dark:bg-slate-700 rounded-full cursor-pointer"
+        >
+          <div className="flex items-center justify-center h-8 w-8 bg-white dark:bg-slate-500 rounded-full">
+            <i>{<BsSunFill className="fill-black dark:fill-white" />}</i>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ const MovieReview = ({ movieId }) => {
         data.map((review) => (
           <div
             key={review?.id}
-            className="flex h-fit w-full bg-white dark:bg-slate-700 rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
+            className="flex h-fit w-full bg-slate-50 dark:bg-slate-700 rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
           >
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3">

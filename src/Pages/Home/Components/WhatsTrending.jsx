@@ -83,7 +83,7 @@ const WhatsOnTrending = ({ tabs }) => {
   return (
     <div className="flex flex-col w-full mt-6">
       <div className="flex justify-between mx-6">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
           <span className="text-black dark:text-white text-xl tracking-wide">
             Trending
           </span>
@@ -124,7 +124,7 @@ const WhatsOnTrending = ({ tabs }) => {
         </div>
         <div className="flex items-center">
           <Link to={`${selectedTab === 0 ? "/movies" : "/tv"}`}>
-            <span className="text-sm tracking-wide text-slate-500 dark:text-white hover:text-black cursor-pointer">
+            <span className="hidden md:visible md:flex text-sm tracking-wide text-slate-500 dark:text-white hover:text-black cursor-pointer">
               View all
             </span>
           </Link>

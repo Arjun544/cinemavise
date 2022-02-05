@@ -4,7 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { createSession, getRequestToken } from "../../Api/LoginApi";
 import { getUserDetails } from "../../Api/UserApi";
 import { UserContext } from "../../App";
-import LeftContainer from "./Components/LeftContainer";
+import ParticlesContainer from "./Components/ParticlesContainer";
 import SocialButton from "./Components/SocialButton";
 
 const Register = () => {
@@ -56,17 +56,17 @@ const Register = () => {
   return (
     <div className="flex ">
       <div className="flex h-screen w-1/2">
-        <LeftContainer />
+        <ParticlesContainer />
       </div>
 
-      <div className="flex flex-col absolute right-0 left-0 top-0 bottom-0 m-auto h-1/2 w-1/3 gap-10 bg-white rounded-2xl items-center justify-center">
+      <div className="flex flex-col absolute right-0 left-0 top-0 bottom-0 m-auto h-1/2 w-4/5 lg:w-1/3 gap-10 bg-[#5d618f] bg-opacity-80 rounded-3xl items-center justify-center">
         {isLoading ? (
           <i>
             {
               <RiMovie2Fill
                 className="animate-spin animate-ping my-10"
                 fontSize={30}
-                color="#000"
+                color="#fff"
               />
             }
           </i>
@@ -88,7 +88,7 @@ const Register = () => {
             />
 
             <Link to="/">
-              <span className="font-semibold  text-black tracking-wider cursor-pointer hover:text-gray-400">
+              <span className="font-semibold  text-white tracking-wider cursor-pointer hover:text-gray-400">
                 Skip
               </span>
             </Link>

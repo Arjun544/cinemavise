@@ -116,7 +116,7 @@ const Genres = () => {
         switch (selectedTab) {
           case 0:
             return (
-              <div className="grid grid-rows-5 grid-flow-col gap-4 h-1/2 w-full">
+              <div className="grid grid-cols-3 md:grid-flow-row-5 md:grid-cols-5 gap-4 h-2/3 m:h-1/2 w-full">
                 {movieGenres?.map((genre, index) => {
                   return (() => {
                     switch (index) {
@@ -133,7 +133,7 @@ const Genres = () => {
                                 setSelectedGenres([...selectedGenres, genre]);
                               }
                             }}
-                            className={`row-span-2 flex items-center justify-center ${
+                            className={`row-span-2 md:row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
                                 ? " border-blue-300 dark:bg-slate-700 border-4"
                                 : "bg-slate-200 dark:bg-slate-700"
@@ -159,7 +159,7 @@ const Genres = () => {
                                 setSelectedGenres([...selectedGenres, genre]);
                               }
                             }}
-                            className={`row-span-2 flex items-center justify-center ${
+                            className={`row-span-2 md:row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
                                 ? " border-blue-300 dark:bg-slate-700 border-4"
                                 : "bg-slate-200 dark:bg-slate-700"
@@ -184,7 +184,7 @@ const Genres = () => {
                                 setSelectedGenres([...selectedGenres, genre]);
                               }
                             }}
-                            className={`row-span-7 flex items-center justify-center ${
+                            className={`row-span-1 md:row-span-1 flex items-center justify-center ${
                               selectedGenres.includes(genre)
                                 ? " border-blue-300 dark:bg-slate-700 border-4"
                                 : "bg-slate-200 dark:bg-slate-700"
@@ -202,36 +202,12 @@ const Genres = () => {
             );
           case 1:
             return (
-              <div className="grid grid-rows-5 grid-flow-col gap-4 h-1/2 w-full">
+              <div className="grid grid-cols-3 md:grid-flow-row-5 md:grid-cols-5 gap-4 h-2/3 m:h-1/2 w-full">
                 {tvGenres?.map((genre, index) => {
                   return (() => {
                     switch (index) {
                       case 0:
-                        return (
-                          <div
-                            key={index}
-                            onClick={() => {
-                              if (selectedGenres.includes(genre)) {
-                                setSelectedGenres(
-                                  selectedGenres.filter((i) => i !== genre)
-                                );
-                              } else {
-                                setSelectedGenres([...selectedGenres, genre]);
-                              }
-                            }}
-                            className={`row-span-2 flex items-center justify-center ${
-                              selectedGenres.includes(genre)
-                                ? " border-blue-300 dark:bg-slate-700 border-4"
-                                : "bg-slate-200 dark:bg-slate-700"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
-                          >
-                            <span className="text-black dark:text-white text-sm tracking-wider">
-                              {genre.name}
-                            </span>
-                          </div>
-                        );
-                      case 7:
-                      case 8:
+                      case 11:
                       case 14:
                         return (
                           <div
@@ -245,7 +221,32 @@ const Genres = () => {
                                 setSelectedGenres([...selectedGenres, genre]);
                               }
                             }}
-                            className={`row-span-2 flex items-center justify-center ${
+                            className={`row-span-2 col-span-2 md:row-span-2 md:col-span-1 flex items-center justify-center ${
+                              selectedGenres.includes(genre)
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                          >
+                            <span className="text-black dark:text-white text-sm tracking-wider">
+                              {genre.name}
+                            </span>
+                          </div>
+                        );
+
+                      case 8:
+                        return (
+                          <div
+                            key={index}
+                            onClick={() => {
+                              if (selectedGenres.includes(genre)) {
+                                setSelectedGenres(
+                                  selectedGenres.filter((i) => i !== genre)
+                                );
+                              } else {
+                                setSelectedGenres([...selectedGenres, genre]);
+                              }
+                            }}
+                            className={`row-span-2 md:row-span-1 flex items-center justify-center ${
                               selectedGenres.includes(genre)
                                 ? " border-blue-300  dark:bg-slate-700 border-4"
                                 : "bg-slate-200 dark:bg-slate-700"
@@ -270,7 +271,7 @@ const Genres = () => {
                                 setSelectedGenres([...selectedGenres, genre]);
                               }
                             }}
-                            className={`row-span-7 flex items-center justify-center ${
+                            className={`row-span-1 md:row-span-1 flex items-center justify-center ${
                               selectedGenres.includes(genre)
                                 ? " border-blue-300 dark:bg-slate-700 border-4"
                                 : "bg-slate-200 dark:bg-slate-700"

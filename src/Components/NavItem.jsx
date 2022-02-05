@@ -31,10 +31,29 @@ const NavItem = ({ link, index }) => {
       }`}
     >
       {/* Tooltip */}
-      {isHovered && (
-        <div className="absolute z-50 flex items-center justify-center left-16 px-4 py-2 bg-black rounded-md shadow-md capitalize lg:invisible">
-          <span className="text-xs font-semibold tracking-wider">
-            {link.name}
+      {isHovered && !isSideBarExpanded && (
+        <div className="absolute z-50 flex items-center justify-center left-16 px-4 py-2 bg-black rounded-md shadow-md capitalize">
+          <span className="text-xs text-white font-semibold tracking-wider">
+            {index === 5
+              ? link.sub.map((item, indx) => (
+                  <div key={indx}>
+                    <NavLink
+                      to={`${
+                        currentUser.isLogin
+                          ? `/${link.name}/${item}`
+                          : "/noAccess"
+                      }`}
+                      className={({ isActive }) =>
+                        isActive ? isActiveStyle : isNotActiveStyle
+                      }
+                    >
+                      <span className="text-xs text-white font-semibold tracking-wider">
+                        {item}
+                      </span>
+                    </NavLink>
+                  </div>
+                ))
+              : link.name}
           </span>
         </div>
       )}

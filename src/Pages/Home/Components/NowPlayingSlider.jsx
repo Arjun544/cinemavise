@@ -78,7 +78,7 @@ const NowPlayingSlider = ( ) => {
                       {movie.original_title}
                     </span>
                     {/* Genres */}
-                    <div className="invisible md:visible flex md:mt-2">
+                    <div className="hidden md:visible md:flex md:mt-2">
                       {!genresLoading &&
                         moviesGenres
                           .map((genre) => genre)
