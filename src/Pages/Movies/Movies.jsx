@@ -32,8 +32,6 @@ const Movies = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-
-
   const { isLoading, data, error, isFetching } = useQuery(
     [
       "discoverMovies",
@@ -49,7 +47,7 @@ const Movies = () => {
         selectedYear === "All" ? "" : selectedYear,
         selectedGenres.map((item) => item),
         selectedLang === undefined ? null : selectedLang.iso_639_1,
-        selectedSort.value,
+        selectedSort.value
       );
 
       return response.data;
@@ -72,11 +70,11 @@ const Movies = () => {
   };
 
   return (
-    <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll">
+    <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-900 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        className={`absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSideBarExpanded ? (
@@ -95,7 +93,9 @@ const Movies = () => {
       {/* Filters */}
       <div className="flex flex-col w-full">
         <div className="flex gap-6 pt-12">
-          <span className="text-black font-semibold">Genre:</span>
+          <span className="text-black dark:text-white font-semibold">
+            Genre:
+          </span>
           <div className="flex flex-wrap items-center mt-1">
             {genres.map((item, index) => (
               <div key={index} className="flex items-center gap-2 mr-3 mb-3">
@@ -109,9 +109,11 @@ const Movies = () => {
                         )
                       : setselectedGenres([...selectedGenres, item.id]);
                   }}
-                  className="form-checkbox text-indigo-600 bg-slate-200 rounded-md outline-none border-0 cursor-pointer"
+                  className="form-checkbox text-indigo-600 bg-slate-200 dark:bg-slate-500 rounded-md outline-none border-0 cursor-pointer"
                 />
-                <span className="text-black text-sm mr-3">{item.name}</span>
+                <span className="text-black dark:text-white text-sm mr-3">
+                  {item.name}
+                </span>
               </div>
             ))}
           </div>
@@ -119,7 +121,7 @@ const Movies = () => {
       </div>
       {/* Buttons */}
       <div className="flex flex-col lg:flex-row items-center justify-between my-4 lg:my-8">
-        <span className="text-black tracking-wide mb-4 lg:mb-0">
+        <span className="text-black dark:text-white tracking-wide mb-4 lg:mb-0">
           Filter results
         </span>
 
@@ -174,14 +176,14 @@ const Movies = () => {
               <button
                 onClick={(e) => handlePreviousPage(e)}
                 disabled={currentPage === 1}
-                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
+                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 Previous
               </button>
               <button
                 onClick={(e) => handleNextPage(e)}
                 disabled={data?.total_pages === currentPage}
-                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
+                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 Next
               </button>

@@ -17,7 +17,11 @@ module.exports = {
     require("daisyui"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/custom-forms"),
+    require("tailwind-scrollbar"),
   ],
+  variants: {
+        scrollbar: ['dark']
+    },
   daisyui: {
     styled: false,
   },

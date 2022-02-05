@@ -14,12 +14,10 @@ import {
   addTvToWatchlist,
   getTvStatus,
 } from "../../../Api/UserApi";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { UserContext } from "../../../App";
 
 const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
-   const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useContext(UserContext);
   const [isFav, setIsFav] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
@@ -81,11 +79,10 @@ const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
   return (
     <div className="relative flex flex-col h-2/5 w-full my-10">
       <ReactTooltip />
-      <LazyLoadImage
-        className="w-full h-2/5 object-cover blur-sm"
+      <img
+        className="w-full h-full object-cover blur-sm"
         src={`https://image.tmdb.org/t/p/original/${show?.backdrop_path}`}
         alt="show poster"
-        effect="blur"
       />
 
       {isTrailerPlaying && (
@@ -94,7 +91,7 @@ const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
             onClick={() => setIsTrailerPlaying(!isTrailerPlaying)}
             className="flex flex-col gap-1 items-center absolute z-50 right-44 top-2.5 cursor-pointer"
           >
-            <MdClose fontSize={24} color={'#fff'} />
+            <MdClose fontSize={24} color={"#fff"} />
             <span className=" text-white">Close Trailer</span>
           </div>
           <iframe
@@ -107,12 +104,10 @@ const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
       )}
 
       <div className="absolute flex w-full h-full bg-opacity-20">
-        <LazyLoadImage
-          className=" h-full p-4 pb-10 rounded-3xl"
+        <img
+          className=" h-full p-4 rounded-3xl"
           src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
           alt="show poster"
-          effect="blur"
-          width={300}
         />
         <div className="flex flex-col my-4">
           <span className="text-white font-semibold text-2xl tracking-wider">
@@ -197,13 +192,10 @@ const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
             <div
               onClick={() => {
                 trailer?.length === 0
-                  ? enqueueSnackbar(
-                      'No trailer available',
-                      {
-                        variant: "warning",
-                        autoHideDuration: 2000,
-                      }
-                    )
+                  ? enqueueSnackbar("No trailer available", {
+                      variant: "warning",
+                      autoHideDuration: 2000,
+                    })
                   : setIsTrailerPlaying(!isTrailerPlaying);
               }}
               className="flex h-10 px-3 gap-2 bg-red-500 rounded-lg items-center justify-center cursor-pointer tranform hover:scale-95 transition-all duration-1000 ease-in-out"
@@ -214,7 +206,7 @@ const ShowInfo = ({ show, trailer, selectedSeason, selectedEpisode }) => {
               </span>
             </div>
             <Link
-              to={`/watch/${show.id}`}
+              to={`/watch/${show?.id}`}
               state={{
                 type: "tv",
                 season: selectedSeason + 1,

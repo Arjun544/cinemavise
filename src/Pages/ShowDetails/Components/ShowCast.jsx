@@ -21,9 +21,8 @@ const ShowCast = ({ showId }) => {
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>

@@ -84,11 +84,10 @@ const MovieInfo = ({ movie, trailer }) => {
   return (
     <div className="relative flex flex-col h-2/5 w-full mt-10 mb-5">
       <ReactTooltip />
-      <LazyLoadImage
-        className="w-full h-2/5 object-cover blur-sm"
+      <img
+        className="w-full h-full object-cover blur-sm"
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
         alt="movie poster"
-        effect="blur"
       />
 
       {isTrailerPlaying && (
@@ -110,12 +109,10 @@ const MovieInfo = ({ movie, trailer }) => {
       )}
 
       <div className="absolute flex w-full h-full  bg-opacity-20">
-        <LazyLoadImage
-          className=" h-full p-4 pb-10 rounded-3xl"
+        <img
+          className=" h-full p-4 rounded-3xl"
           src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
           alt="movie poster"
-          effect="blur"
-          width={300}
         />
         <div className="flex flex-col my-4">
           <span className="text-white font-semibold text-2xl tracking-wider">

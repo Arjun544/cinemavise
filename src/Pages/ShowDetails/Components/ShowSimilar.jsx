@@ -32,9 +32,8 @@ const ShowSimilar = ({ showId }) => {
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>
@@ -62,14 +61,14 @@ const ShowSimilar = ({ showId }) => {
         <button
           onClick={(e) => handlePreviousPage(e)}
           disabled={currentPage === 1}
-          className="bg-black h-10 w-24 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
+          className="bg-black h-10 w-24 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
         >
           Previous
         </button>
         <button
           onClick={(e) => handleNextPage(e)}
           disabled={data?.total_pages === currentPage}
-          className="bg-black h-10 w-24 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
+          className="bg-black h-10 w-24 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
         >
           Next
         </button>

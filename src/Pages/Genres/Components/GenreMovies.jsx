@@ -55,11 +55,11 @@ const GenreMovies = () => {
   };
 
   return (
-    <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll">
+    <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-900 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        className={`absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSideBarExpanded ? (
@@ -83,7 +83,7 @@ const GenreMovies = () => {
           <Breadcrumb label={genres.map((item) => item.name).join(", ")} />
         </Breadcrumbs>
       </div>
-      <span className="text-black tracking-wide pb-4 lg:mb-0">
+      <span className="text-black dark:text-white tracking-wide pb-4 lg:mb-0">
         Filter results
       </span>
       {/* Filter results */}
@@ -92,7 +92,9 @@ const GenreMovies = () => {
           <WhatsOnTrendingLoader />
         ) : !data.results.length > 0 ? (
           <div className="flex items-center justify-center">
-            <span className="text-slate-500">Nothing found</span>
+            <span className="text-slate-500 dark:text-slate-300">
+              Nothing found
+            </span>
           </div>
         ) : (
           <div className="flex flex-col h-full">
@@ -116,14 +118,14 @@ const GenreMovies = () => {
               <button
                 onClick={(e) => handlePreviousPage(e)}
                 disabled={currentPage === 1}
-                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
+                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 Previous
               </button>
               <button
                 onClick={(e) => handleNextPage(e)}
                 disabled={data?.total_pages === currentPage}
-                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
+                className="bg-black h-10 w-24 mb-10 rounded-md text-sm text-white font-semibold tracking-wider transform disabled:bg-gray-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 Next
               </button>

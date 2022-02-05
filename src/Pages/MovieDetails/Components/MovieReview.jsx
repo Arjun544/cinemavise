@@ -1,12 +1,8 @@
 import moment from "moment";
 import React, { useState } from "react";
 import { RiMovie2Fill } from "react-icons/ri";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { useQuery } from "react-query";
-import {
-  getMovieReviewsById,
-} from "../../../Api/MoviesApi";
+import { getMovieReviewsById } from "../../../Api/MoviesApi";
 import ReviewContent from "./ReviewContent";
 
 const MovieReview = ({ movieId }) => {
@@ -18,18 +14,18 @@ const MovieReview = ({ movieId }) => {
     },
     {
       keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   );
 
   if (isLoading) {
     return (
-      <div className="flex w-screen h-full bg-sky-50 dark:bg-gray-800 items-center justify-center">
+      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>
@@ -39,31 +35,32 @@ const MovieReview = ({ movieId }) => {
 
   return (
     <div className="flex flex-col my-6 mx-6">
-      {!isLoading &&
+      {!isLoading && data.length === 0 ? (
+        <div className="flex w-full h-full items-center justify-center">
+          <span className="text-black dark:text-white tracking-wider ">
+            No reviews
+          </span>
+        </div>
+      ) : (
         data.map((review) => (
           <div
-            key={review.id}
-            className="flex h-fit w-full bg-white rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
+            key={review?.id}
+            className="flex h-fit w-full bg-white dark:bg-slate-700 rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
           >
-            <LazyLoadImage
-              className="rounded-full h-12 w-12"
-              src={review.author_details.avatar_path.slice(1)}
-              alt="author pic"
-              effect="blur"
-            />
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <span className="text-black">
-                  {review.author_details.username}
+                <span className="text-black dark:text-white">
+                  {review?.author_details.username}
                 </span>
-                <span className="text-black text-xs">
-                  {moment(review.created_at).format("Do MMM YYYY")}
+                <span className="text-black dark:text-white text-xs">
+                  {moment(review?.created_at).format("Do MMM YYYY")}
                 </span>
               </div>
-              <ReviewContent content={review.content} />
+              <ReviewContent content={review?.content} />
             </div>
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 };

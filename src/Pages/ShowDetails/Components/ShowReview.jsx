@@ -3,8 +3,6 @@ import { RiMovie2Fill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import { getShowReviewsById } from "../../../Api/TvApi";
 import ReviewContent from "./ReviewContent";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ShowReview = ({ showId }) => {
   const { isLoading, data, error } = useQuery(
@@ -24,9 +22,8 @@ const ShowReview = ({ showId }) => {
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>
@@ -36,31 +33,32 @@ const ShowReview = ({ showId }) => {
 
   return (
     <div className="flex flex-col my-6 mx-6">
-      {!isLoading &&
+      {!isLoading && data.length === 0 ? (
+        <div className="flex w-full h-full items-center justify-center">
+          <span className="text-black dark:text-white tracking-wider ">
+            No reviews
+          </span>
+        </div>
+      ) : (
         data.map((review) => (
           <div
             key={review.id}
-            className="flex h-fit w-full bg-white rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
+            className="flex h-fit w-full bg-white dark:bg-slate-700 rounded-2xl shadow-sm mb-6 gap-6 py-5 px-4"
           >
-            <LazyLoadImage
-              className="rounded-full h-12 w-12"
-              src={review.author_details.avatar_path.slice(1)}
-              alt="author pic"
-              effect="blur"
-            />
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <span className="text-black">
+                <span className="text-black dark:text-white">
                   {review.author_details.username}
                 </span>
-                <span className="text-black text-xs">
+                <span className="text-black dark:text-white text-xs">
                   {moment(review.created_at).format("Do MMM YYYY")}
                 </span>
               </div>
               <ReviewContent content={review.content} />
             </div>
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 };

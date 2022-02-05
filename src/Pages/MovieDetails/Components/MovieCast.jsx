@@ -17,13 +17,12 @@ const MovieCast = ({ movieId }) => {
 
   if (isLoading) {
     return (
-      <div className="flex w-screen h-full bg-sky-50 dark:bg-gray-800 items-center justify-center">
+      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>

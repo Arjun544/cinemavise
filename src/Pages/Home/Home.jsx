@@ -18,11 +18,11 @@ const Home = () => {
   };
 
   return (
-    <div className="relative flex flex-col w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll">
+    <div className="relative flex flex-col w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`invisible lg:visible absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-900 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        className={`invisible lg:visible absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSideBarExpanded ? (
@@ -41,7 +41,7 @@ const Home = () => {
       <NowPlayingSlider />
       <WhatsOnTrending tabs={tabs} />
       <WhatsPopular tabs={tabs} />
-      <TopRated tabs={tabs}/>
+      <TopRated tabs={tabs} />
     </div>
   );
 };

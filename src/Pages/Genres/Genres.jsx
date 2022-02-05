@@ -46,11 +46,11 @@ const Genres = () => {
   );
 
   return (
-    <div className="relative flex flex-col items-center w-screen h-screen pt-8 px-8 bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll">
+    <div className="relative flex flex-col items-center w-screen h-screen pt-8 px-8 bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`invisible lg:visible absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-900 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        className={`invisible lg:visible absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSideBarExpanded ? (
@@ -91,7 +91,7 @@ const Genres = () => {
               className={
                 selectedTab === index
                   ? "tabs tab-active w-24 h-8 items-center justify-center bg-amber-400 cursor-pointer font-medium  text-white tracking-wide rounded-md transform hover:scale-95 transition duration-500 ease-in-out"
-                  : "tabs w-24 h-10 items-center justify-center font-medium text-black hover:text-gray-500 cursor-pointer tracking-wide"
+                  : "tabs w-24 h-10 items-center justify-center font-medium text-black dark:text-white hover:text-gray-500 cursor-pointer tracking-wide"
               }
             >
               <div className="flex items-center gap-2">
@@ -103,10 +103,10 @@ const Genres = () => {
         </div>
       </div>
       <div className="flex flex-col w-full items-start justify-start gap-1">
-        <span className="mt-4 text-black">{`${
+        <span className="mt-4 text-black dark:text-white">{`${
           selectedTab === 0 ? "Movies genres" : "Tv genres"
         }`}</span>
-        <span className="mb-12 text-xs text-slate-500">
+        <span className="mb-12 text-xs text-slate-500 dark:text-slate-300">
           Select one or more than one genres
         </span>
       </div>
@@ -135,11 +135,11 @@ const Genres = () => {
                             }}
                             className={`row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -161,11 +161,11 @@ const Genres = () => {
                             }}
                             className={`row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 hover:dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -186,11 +186,11 @@ const Genres = () => {
                             }}
                             className={`row-span-7 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 hover:dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -221,11 +221,11 @@ const Genres = () => {
                             }}
                             className={`row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -247,11 +247,11 @@ const Genres = () => {
                             }}
                             className={`row-span-2 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300  dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -272,11 +272,11 @@ const Genres = () => {
                             }}
                             className={`row-span-7 flex items-center justify-center ${
                               selectedGenres.includes(genre)
-                                ? " border-blue-300 border-4"
-                                : "bg-slate-200"
-                            } rounded-xl cursor-pointer hover:bg-slate-300 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
+                                ? " border-blue-300 dark:bg-slate-700 border-4"
+                                : "bg-slate-200 dark:bg-slate-700"
+                            } rounded-xl cursor-pointer hover:bg-slate-300 hover:dark:bg-slate-600 shadow-sm hover:scale-105 transition-all duration-300 ease-in-out`}
                           >
-                            <span className="text-black text-sm tracking-wider">
+                            <span className="text-black dark:text-white text-sm tracking-wider">
                               {genre.name}
                             </span>
                           </div>
@@ -300,7 +300,7 @@ const Genres = () => {
       >
         <button
           disabled={selectedGenres.length === 0}
-          className="bg-black h-10 w-24 mt-12 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
+          className="bg-black h-10 w-24 mt-12 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:dark:bg-gray-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
         >
           Filter
         </button>

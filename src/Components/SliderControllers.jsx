@@ -7,12 +7,12 @@ const SliderControllers = ({ slider }) => {
       <RiArrowLeftSLine
         onClick={() => slider?.current?.slickPrev()}
         fontSize={25}
-        className="cursor-pointer rounded-lg fill-black dark:fill-white hover:bg-slate-300"
+        className="cursor-pointer rounded-lg fill-black dark:fill-white hover:bg-slate-600"
       />
       <RiArrowRightSLine
         onClick={() => slider?.current?.slickNext()}
         fontSize={25}
-        className="cursor-pointer rounded-lg fill-black dark:fill-white hover:bg-slate-300"
+        className="cursor-pointer rounded-lg fill-black dark:fill-white hover:bg-slate-600"
       />
     </div>
   );

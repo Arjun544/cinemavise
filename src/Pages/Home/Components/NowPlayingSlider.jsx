@@ -48,12 +48,16 @@ const NowPlayingSlider = ( ) => {
     <div className="relative z-10 flex w-full h-1/3 items-center justify-center my-8">
       <div
         onClick={() => prevSlide()}
-        className="flex h-8 w-8 items-center justify-center bg-slate-100 rounded-full mx-4 tranform hover:scale-110 cursor-pointer transition-all duration-300 ease-in-out"
+        className="flex h-8 w-8 items-center justify-center bg-slate-100 dark:bg-slate-600 rounded-full mx-4 tranform hover:scale-110 cursor-pointer transition-all duration-300 ease-in-out"
       >
-        <MdOutlineKeyboardArrowLeft fontSize={26} color="#000" />
+        <MdOutlineKeyboardArrowLeft
+          fontSize={26}
+          className="fill-black dark:fill-white"
+        />
       </div>
       {!moviesLoading &&
-        !genresLoading&& nowPlayingMovies.map(
+        !genresLoading &&
+        nowPlayingMovies.map(
           (movie, index) =>
             current === index && (
               <div
@@ -95,9 +99,12 @@ const NowPlayingSlider = ( ) => {
         )}
       <div
         onClick={() => nextSlide()}
-        className="flex h-8 w-8 items-center justify-center bg-slate-100 rounded-full mx-4 tranform hover:scale-110 cursor-pointer transition-all duration-300 ease-in-out"
+        className="flex h-8 w-8 items-center justify-center bg-slate-100 dark:bg-slate-600 rounded-full mx-4 tranform hover:scale-110 cursor-pointer transition-all duration-300 ease-in-out"
       >
-        <MdOutlineKeyboardArrowRight fontSize={26} color="#000" />
+        <MdOutlineKeyboardArrowRight
+          fontSize={26}
+          className="fill-black dark:fill-white"
+        />
       </div>
     </div>
   );

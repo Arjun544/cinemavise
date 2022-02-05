@@ -45,21 +45,21 @@ const ShowSeasons = ({
       <div className="flex flex-col">
         {seasons.map((season, index) => (
           <div
-            key={season.id}
+            key={season?.id}
             onClick={() => setselectedSeason(index)}
             className={`flex items-center justify-around py-2 w-40 px-3 ${
-              index === selectedSeason ? "bg-green-500" : "bg-slate-200"
+              index === selectedSeason ? "bg-green-500" : "bg-slate-200 dark:bg-slate-700"
             } mb-2 rounded-lg  cursor-pointer`}
           >
             <span
-              className={`text-black text-center text-sm  tracking-wider ${
+              className={`text-black dark:text-white text-center text-sm  tracking-wider ${
                 index !== selectedSeason && "hover:text-green-500"
               }`}
             >
-              {season.name}
+              {season?.name}
             </span>
-            <span className="text-black text-center text-xs  tracking-wider ">
-              {season.air_date.split("-", 1)}
+            <span className="text-black dark:text-white text-center text-xs  tracking-wider ">
+              {season?.air_date.split("-", 1)}
             </span>
           </div>
         ))}
@@ -83,12 +83,12 @@ const ShowSeasons = ({
               className={`flex items-center h-10 gap-4 px-3 ${
                 index === selectedEpisode
                   ? "bg-green-500 "
-                  : "bg-slate-200 hover:text-green-500"
+                  : "bg-slate-200 dark:bg-slate-700 hover:text-green-500"
               } mb-2 mr-2 rounded-lg text-black  cursor-pointer shadow-sm`}
             >
               <RiPlayFill />
-              <span className=" text-sm">{episode.episode_number}</span>
-              <span className="text-sm w-28 truncate">{episode.name}</span>
+              <span className=" text-sm dark:text-white">{episode.episode_number}</span>
+              <span className="text-sm w-28 truncate dark:text-white">{episode.name}</span>
             </div>
           ))}
         </Masonry>

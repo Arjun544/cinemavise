@@ -21,9 +21,8 @@ const PersonMedia = ({ personId }) => {
         <i>
           {
             <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
+              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
               fontSize={30}
-              color="#000"
             />
           }
         </i>
@@ -44,10 +43,10 @@ const PersonMedia = ({ personId }) => {
           500: 1,
         }}
       >
-        {data.map((item, index) => (
-          <div key={item.id} className="w-72 h-full">
+        {data.map((item) => (
+          <div key={item.id} className="w-60 h-full">
             <LazyLoadImage
-              className=" w-full rounded-xl h-96 mb-10   object-cover transform hover:scale-95 transition-all duration-300 ease-in-out"
+              className=" w-full rounded-xl h-96 mb-10 object-cover transform hover:scale-95 transition-all duration-300 ease-in-out"
               src={`https://image.tmdb.org/t/p/original/${item.file_path}`}
               alt="movie poster"
               effect="blur"

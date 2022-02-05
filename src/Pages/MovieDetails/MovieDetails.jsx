@@ -60,13 +60,13 @@ const MovieDetails = () => {
   }
 
   return (
-    <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden">
+    <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
         className={`invisible lg:visible absolute z-30 top-10 ${
           isSdeBarExpanded ? "-left-3" : "left-3"
-        } flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-900 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        } flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSdeBarExpanded ? (
