@@ -4,11 +4,13 @@ import { useQuery } from "react-query";
 import { getShowSimilarById } from "../../../Api/TvApi";
 import { RiMovie2Fill } from "react-icons/ri";
 import ShowItem from "../../../Components/ShowItem";
+import { useSnackbar } from "notistack";
 
 const ShowSimilar = ({ showId }) => {
+   const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isLoading, data, error } = useQuery(
+  const { isLoading, data, isError } = useQuery(
     ["showSimilarById", currentPage, showId],
     async () => {
       const response = await getShowSimilarById(showId, currentPage);
@@ -40,6 +42,14 @@ const ShowSimilar = ({ showId }) => {
       </div>
     );
   }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
+
 
   return (
     <div className="flex flex-col my-6 mx-4">

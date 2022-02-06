@@ -1,4 +1,4 @@
-import { BsCollectionFill, BsPersonFill } from "react-icons/bs";
+import { BsCollectionFill } from "react-icons/bs";
 import { MdOutlinePersonalVideo } from "react-icons/md";
 import {
   RiDashboardFill,

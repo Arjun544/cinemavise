@@ -4,16 +4,23 @@ import { useQuery } from "react-query";
 import Masonry from "react-masonry-css";
 import { getShowCastById } from "../../../Api/TvApi";
 import PersonItem from "../../Home/Components/PersonItem";
+import { useSnackbar } from "notistack";
 
 const ShowCast = ({ showId }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const {
     isLoading,
     data: showCast,
-    error,
-  } = useQuery(["showCastById", showId], async () => {
-    const response = await getShowCastById(showId);
-    return response.data.cast;
-  }, { keepPreviousData: true });
+    isError,
+  } = useQuery(
+    ["showCastById", showId],
+    async () => {
+      const response = await getShowCastById(showId);
+      return response.data.cast;
+    },
+    { keepPreviousData: true }
+  );
 
   if (isLoading) {
     return (
@@ -28,6 +35,13 @@ const ShowCast = ({ showId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useSnackbar } from "notistack";
 import { RiMovie2Fill, RiPlayFill } from "react-icons/ri";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
-import { getShowCastById, getShowEpisodes } from "../../../Api/TvApi";
+import { getShowEpisodes } from "../../../Api/TvApi";
 
 const ShowSeasons = ({
   showId,
@@ -12,7 +12,9 @@ const ShowSeasons = ({
   selectedEpisode,
   setselectedEpisode,
 }) => {
-  const { isLoading, data, error } = useQuery(
+  const { enqueueSnackbar } = useSnackbar();
+  
+  const { isLoading, data, isError } = useQuery(
     ["showEpisodes", showId, selectedSeason],
     async () => {
       const response = await getShowEpisodes(
@@ -38,6 +40,13 @@ const ShowSeasons = ({
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

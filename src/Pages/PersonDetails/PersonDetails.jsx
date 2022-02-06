@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -14,10 +13,13 @@ import PersonMedia from "./Components/PersonMedia";
 import MovieDetailsLoader from "../MovieDetails/Loaders/MovieDetailsLoader";
 import PersonSocials from "./Components/PersonSocials";
 import { SideBarContext } from "../Main";
+import { useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const tabs = ["Movies", "Tv", "Media", "Socials"];
 
 const PersonDetails = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const params = useParams();
   const personId = params.id;
@@ -26,17 +28,23 @@ const PersonDetails = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const {
-    isLoading: isPersonDetailsLoading,
-    isFetching: isBgLoading,
-    data,
-  } = useQuery(["personDetails", personId], async () => {
-    const response = await getPersonById(personId);
-    return response.data;
-  });
+  const { isLoading, isFetching, data, isError } = useQuery(
+    ["personDetails", personId],
+    async () => {
+      const response = await getPersonById(personId);
+      return response.data;
+    }
+  );
 
-  if (isPersonDetailsLoading && isBgLoading) {
+  if (isLoading && isFetching) {
     return <MovieDetailsLoader />;
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

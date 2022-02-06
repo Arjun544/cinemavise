@@ -4,9 +4,12 @@ import { useQuery } from "react-query";
 import { getPersonMedia } from "../../../Api/PersonApi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { useSnackbar } from "notistack";
 
 const PersonMedia = ({ personId }) => {
-  const { isLoading, data, error } = useQuery(
+  const { enqueueSnackbar } = useSnackbar();
+  
+  const { isLoading, data, isError } = useQuery(
     ["personMedia", personId],
     async () => {
       const response = await getPersonMedia(personId);
@@ -28,6 +31,13 @@ const PersonMedia = ({ personId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

@@ -1,7 +1,4 @@
-import { RiMovie2Fill } from "react-icons/ri";
-import { useQuery } from "react-query";
 import Masonry from "react-masonry-css";
-import { getMovieMediaById } from "../../../Api/MoviesApi";
 
 const MovieMedia = ({ media }) => {
 

@@ -4,16 +4,23 @@ import { useQuery } from "react-query";
 import Masonry from "react-masonry-css";
 import { getMovieCastById } from "../../../Api/MoviesApi";
 import PersonItem from "../../Home/Components/PersonItem";
+import { useSnackbar } from "notistack";
 
 const MovieCast = ({ movieId }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const {
     isLoading,
     data: movieCast,
-    error,
-  } = useQuery(["movieCastById", movieId], async () => {
-    const response = await getMovieCastById(movieId);
-    return response.data.cast;
-  }, { keepPreviousData: true });
+    isError,
+  } = useQuery(
+    ["movieCastById", movieId],
+    async () => {
+      const response = await getMovieCastById(movieId);
+      return response.data.cast;
+    },
+    { keepPreviousData: true }
+  );
 
   if (isLoading) {
     return (
@@ -28,6 +35,13 @@ const MovieCast = ({ movieId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (
@@ -45,7 +59,7 @@ const MovieCast = ({ movieId }) => {
       >
         {!isLoading &&
           movieCast.map((cast, index) => (
-            <PersonItem key={cast.id} person={cast} isBottom={true}/>
+            <PersonItem key={cast.id} person={cast} isBottom={true} />
           ))}
       </Masonry>
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getMovieById, getMovieMediaById } from "../../Api/MoviesApi";
 import {
@@ -9,17 +9,18 @@ import {
 import { SideBarContext } from "../Main";
 import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import MovieInfo from "./Components/MovieInfo";
-import { RiMovie2Fill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import MovieMedia from "./Components/MovieMedia";
 import MovieCast from "./Components/MovieCast";
 import MovieSimilar from "./Components/MovieSimilar";
 import MovieReview from "./Components/MovieReview";
 import MovieDetailsLoader from "./Loaders/MovieDetailsLoader";
+import { useSnackbar } from "notistack";
 
 const tabs = ["Cast", "Media", "Similar", "Reviews"];
 
 const MovieDetails = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
   const params = useParams();
@@ -31,9 +32,9 @@ const MovieDetails = () => {
 
   const {
     isLoading: isMovieLoading,
-    isFetching: isMovieBgLoading,
+    isRefetching: isMovieBgLoading,
     data: movie,
-    error,
+    isError: hasMovieError
   } = useQuery(["movieById", movieId], async () => {
     const response = await getMovieById(movieId);
     return response.data;
@@ -41,8 +42,9 @@ const MovieDetails = () => {
 
   const {
     isLoading: isMediaLoading,
-    isFetching: isMediaBgLoading,
+    isRefetching: isMediaBgLoading,
     data: media,
+    isError: hasMediaError
   } = useQuery(
     ["movieMediaById", movieId],
     async () => {
@@ -60,6 +62,13 @@ const MovieDetails = () => {
   ) {
     return <MovieDetailsLoader />;
   }
+
+   if (hasMovieError || hasMediaError) {
+     enqueueSnackbar("Something went wrong", {
+       variant: "error",
+       autoHideDuration: 2000,
+     });
+   }
 
   return (
     <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">

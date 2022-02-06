@@ -9,8 +9,10 @@ import { getMoviesGenres } from "../../Api/MoviesApi";
 import { getShowGenres } from "../../Api/TvApi";
 import { SideBarContext } from "../Main";
 import { tabs } from "../../Constants/constants";
+import { useSnackbar } from "notistack";
 
 const Genres = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const { isSideBarExpanded, setisSideBarExpanded } =
@@ -19,11 +21,7 @@ const Genres = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const {
-    isMovieGenresLoading,
-    data: movieGenres,
-    isFetching: isMovieGenresFetching,
-  } = useQuery(
+  const { data: movieGenres, error: hasMoviesError } = useQuery(
     ["movieGenres"],
     async () => {
       const response = await getMoviesGenres();
@@ -32,11 +30,7 @@ const Genres = () => {
     { keepPreviousData: true, refetchOnWindowFocus: false }
   );
 
-  const {
-    isTvGenresLoading,
-    data: tvGenres,
-    isFetching: isTvGenresFetching,
-  } = useQuery(
+  const { data: tvGenres, error: hasTvError } = useQuery(
     ["tvGenres"],
     async () => {
       const response = await getShowGenres();
@@ -44,6 +38,13 @@ const Genres = () => {
     },
     { keepPreviousData: true, refetchOnWindowFocus: false }
   );
+
+  if (hasMoviesError || hasTvError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="relative flex flex-col items-center w-screen h-screen pt-8 px-8 bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">

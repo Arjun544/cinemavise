@@ -18,8 +18,10 @@ import {
   years,
 } from "../../Constants/constants";
 import WhatsOnTrendingLoader from "../Home/Loaders/WhatsOnTrendingLoader";
+import { useSnackbar } from "notistack";
 
 const Tv = () => {
+   const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setselectedYear] = useState("All");
   const [selectedGenres, setselectedGenres] = useState([]);
@@ -32,7 +34,7 @@ const Tv = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const { isLoading, data, error, isFetching } = useQuery(
+  const { isLoading, data, isRefetching, isError } = useQuery(
     [
       "discoverTv",
       currentPage,
@@ -67,6 +69,14 @@ const Tv = () => {
     e.preventDefault();
     setCurrentPage((prev) => prev - 1);
   };
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
+
 
   return (
     <div className="relative flex flex-col pt-20 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
@@ -147,7 +157,7 @@ const Tv = () => {
       </div>
       {/* Filter results */}
       <div className="flex flex-col w-full h-full">
-        {isLoading || isFetching ? (
+        {isLoading || isRefetching ? (
           <WhatsOnTrendingLoader />
         ) : !data.results.length > 0 ? (
           <div className="flex items-center justify-center">

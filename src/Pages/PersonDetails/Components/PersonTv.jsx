@@ -4,10 +4,12 @@ import { useQuery } from "react-query";
 import { RiMovie2Fill } from "react-icons/ri";
 import { getPersonTv } from "../../../Api/PersonApi";
 import ShowItem from "../../../Components/ShowItem";
+import { useSnackbar } from "notistack";
 
 const PersonTv = ({ personId }) => {
+  const { enqueueSnackbar } = useSnackbar();
 
-  const { isLoading, data, error } = useQuery(
+  const { isLoading, data, isError } = useQuery(
     ["personTv", personId],
     async () => {
       const response = await getPersonTv(personId);
@@ -29,6 +31,13 @@ const PersonTv = ({ personId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

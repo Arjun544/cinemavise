@@ -5,15 +5,17 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import { getMovies, getMoviesGenres, getNowPlayingMovies } from "../../../Api/MoviesApi";
+import { getMovies, getMoviesGenres } from "../../../Api/MoviesApi";
 import NowPlayingSliderLoader from "../Loaders/NowPlayingSliderLoader";
+import { useSnackbar } from "notistack";
 
-const NowPlayingSlider = ( ) => {
+const NowPlayingSlider = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState(0);
   const {
     isLoading: moviesLoading,
     data: nowPlayingMovies,
-    error,
+    isError: hasMoviesError,
   } = useQuery(
     "nowPlayingMovies",
     async () => {
@@ -22,7 +24,11 @@ const NowPlayingSlider = ( ) => {
     },
     { keepPreviousData: true, refetchOnWindowFocus: false }
   );
-  const { isLoading: genresLoading, data: moviesGenres } = useQuery(
+  const {
+    isLoading: genresLoading,
+    data: moviesGenres,
+    isError: hasGenresError,
+  } = useQuery(
     "moviesGenres",
     async () => {
       const response = await getMoviesGenres();
@@ -40,10 +46,16 @@ const NowPlayingSlider = ( ) => {
   };
 
   if (moviesLoading && genresLoading) {
-    return (
-      <NowPlayingSliderLoader/>
-    );
+    return <NowPlayingSliderLoader />;
   }
+
+  if (hasMoviesError || hasGenresError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
+
   return (
     <div className="relative z-10 flex w-full h-1/3 items-center justify-center my-8">
       <div

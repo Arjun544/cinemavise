@@ -16,10 +16,12 @@ import ShowSimilar from "./Components/ShowSimilar";
 import ShowReview from "./Components/ShowReview";
 import MovieDetailsLoader from "../MovieDetails/Loaders/MovieDetailsLoader";
 import ShowSeasons from "./Components/ShowSeasons";
+import { useSnackbar } from "notistack";
 
 const tabs = ["Seasons", "Cast", "Media", "Similar", "Reviews"];
 
 const ShowDetails = () => {
+   const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
   const [selectedSeason, setselectedSeason] = useState(0);
@@ -33,9 +35,9 @@ const ShowDetails = () => {
 
   const {
     isLoading: isShowLoading,
-    isFetching: isShowBgLoading,
+    isRefetching: isShowBgLoading,
     data: show,
-    error,
+    isError: hasShowError
   } = useQuery(["showById", showId], async () => {
     const response = await getShowById(showId);
     return response.data;
@@ -43,8 +45,9 @@ const ShowDetails = () => {
 
   const {
     isLoading: isMediaLoading,
-    isFetching: isMediaBgLoading,
+    isRefetching: isMediaBgLoading,
     data: media,
+    isError: hasMediaError
   } = useQuery(
     ["showMediaById", showId],
     async () => {
@@ -57,6 +60,13 @@ const ShowDetails = () => {
   if (isShowLoading && isMediaLoading && isShowBgLoading && isMediaBgLoading) {
     return <MovieDetailsLoader />;
   }
+
+   if (hasMediaError || hasShowError) {
+     enqueueSnackbar("Something went wrong", {
+       variant: "error",
+       autoHideDuration: 2000,
+     });
+   }
 
   return (
     <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">

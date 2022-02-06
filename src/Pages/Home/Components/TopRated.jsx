@@ -6,15 +6,18 @@ import WhatsOnTrendingLoader from "../Loaders/WhatsOnTrendingLoader";
 import { getMovies } from "../../../Api/MoviesApi";
 import { getShows } from "../../../Api/TvApi";
 import Masonry from "react-masonry-css";
+import { useSnackbar } from "notistack";
 
 const TopRated = ({ tabs }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
-    isMoviesLoading,
+    isLoading: isMoviesLoading,
     data: movies,
-    isFetching: isMovieFetching,
+    isRefetching: isMovieFetching,
+    isError: hasMoviesError,
   } = useQuery(
     ["topRatedMovies", currentPage],
     async () => {
@@ -25,9 +28,10 @@ const TopRated = ({ tabs }) => {
   );
 
   const {
-    isShowsLoading,
+    isLoading: isShowsLoading,
     data: shows,
-    isFetching: isShowFetching,
+    isRefetching: isShowFetching,
+    isError: hasShowsError,
   } = useQuery(
     ["topRatedShows", currentPage],
     async () => {
@@ -45,6 +49,13 @@ const TopRated = ({ tabs }) => {
     e.preventDefault();
     setCurrentPage((prev) => prev - 1);
   };
+
+  if (hasMoviesError || hasShowsError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="flex flex-col w-full mt-6">

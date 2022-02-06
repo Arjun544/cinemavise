@@ -1,10 +1,12 @@
+import { useSnackbar } from "notistack";
 import { RiInstagramFill, RiMovie2Fill, RiTwitterFill } from "react-icons/ri";
-import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
-import { getPersonMedia, getPersonSocials } from "../../../Api/PersonApi";
+import { getPersonSocials } from "../../../Api/PersonApi";
 
 const PersonSocials = ({ personId }) => {
-  const { isLoading, data, error } = useQuery(
+  const { enqueueSnackbar } = useSnackbar();
+  
+  const { isLoading, data, isError } = useQuery(
     ["personSocials", personId],
     async () => {
       const response = await getPersonSocials(personId);
@@ -26,6 +28,13 @@ const PersonSocials = ({ personId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

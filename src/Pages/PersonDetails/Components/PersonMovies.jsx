@@ -1,13 +1,14 @@
-import React, { useState } from "react";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
-import { getMovieSimilarById } from "../../../Api/MoviesApi";
 import { RiMovie2Fill } from "react-icons/ri";
 import MovieItem from "../../../Components/MovieItem";
 import { getPersonMovies } from "../../../Api/PersonApi";
+import { useSnackbar } from "notistack";
 
 const PersonMovies = ({ personId }) => {
-  const { isLoading, data, error } = useQuery(
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { isLoading, data, isError } = useQuery(
     ["personMovies", personId],
     async () => {
       const response = await getPersonMovies(personId);
@@ -30,6 +31,13 @@ const PersonMovies = ({ personId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

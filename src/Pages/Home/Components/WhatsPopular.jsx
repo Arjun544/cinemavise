@@ -8,15 +8,18 @@ import { getShows } from "../../../Api/TvApi";
 import Slider from "react-slick";
 import SliderControllers from "../../../Components/SliderControllers";
 import { Link } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const WhatsPopular = ({ tabs }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const slider = useRef(null);
   const [selectedTab, setSelectedTab] = useState(0);
 
   const {
-    isMoviesLoading,
+   isLoading: isMoviesLoading,
     data: movies,
-    isFetching: isMovieFetching,
+    isRefetching: isMovieFetching,
+    isError: hasMoviesError
   } = useQuery(
     "popularMovies",
     async () => {
@@ -27,9 +30,10 @@ const WhatsPopular = ({ tabs }) => {
   );
 
   const {
-    isShowsLoading,
+   isLoading: isShowsLoading,
     data: shows,
-    isFetching: isShowFetching,
+    isRefetching: isShowFetching,
+    isError: hasShowsError
   } = useQuery(
     "popularShows",
     async () => {
@@ -77,6 +81,13 @@ const WhatsPopular = ({ tabs }) => {
       },
     ],
   };
+
+  if (hasMoviesError || hasShowsError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="flex flex-col w-full mt-6">

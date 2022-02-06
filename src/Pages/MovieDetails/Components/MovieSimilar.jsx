@@ -4,11 +4,13 @@ import { useQuery } from "react-query";
 import { getMovieSimilarById } from "../../../Api/MoviesApi";
 import { RiMovie2Fill } from "react-icons/ri";
 import MovieItem from "../../../Components/MovieItem";
+import { useSnackbar } from "notistack";
 
 const MovieSimilar = ({ movieId }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isLoading, data, error } = useQuery(
+  const { isLoading, data, isError } = useQuery(
     ["movieSimilarById", currentPage, movieId],
     async () => {
       const response = await getMovieSimilarById(movieId, currentPage);
@@ -39,6 +41,13 @@ const MovieSimilar = ({ movieId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

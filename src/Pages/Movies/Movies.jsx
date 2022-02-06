@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
 import { getFilterMovies } from "../../Api/MoviesApi";
 import { SideBarContext } from "../Main";
 import CustomDropDown from "../../Components/CustomDropDown";
@@ -18,8 +17,10 @@ import {
   years,
 } from "../../Constants/constants";
 import WhatsOnTrendingLoader from "../Home/Loaders/WhatsOnTrendingLoader";
+import { useSnackbar } from "notistack";
 
 const Movies = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setselectedYear] = useState("All");
   const [selectedGenres, setselectedGenres] = useState([]);
@@ -32,7 +33,7 @@ const Movies = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const { isLoading, data, error, isFetching } = useQuery(
+  const { isLoading, data, isRefetching, isError } = useQuery(
     [
       "discoverMovies",
       currentPage,
@@ -68,6 +69,13 @@ const Movies = () => {
     e.preventDefault();
     setCurrentPage((prev) => prev - 1);
   };
+
+   if (isError) {
+     enqueueSnackbar("Something went wrong", {
+       variant: "error",
+       autoHideDuration: 2000,
+     });
+   }
 
   return (
     <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
@@ -148,7 +156,7 @@ const Movies = () => {
       </div>
       {/* Filter results */}
       <div className="flex flex-col w-full h-full">
-        {isLoading || isFetching ? (
+        {isLoading || isRefetching ? (
           <WhatsOnTrendingLoader />
         ) : !data.results.length > 0 ? (
           <div className="flex items-center justify-center">

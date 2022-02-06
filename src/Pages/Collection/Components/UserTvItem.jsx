@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useSnackbar } from "notistack";
 import { addTvToFav, addTvToWatchlist } from "../../../Api/UserApi.js";
-import { Link, useNavigate } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App.js";
 
 const UserTvItem = ({ tv, refetch, isFromFav }) => {

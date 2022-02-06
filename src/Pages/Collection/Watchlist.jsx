@@ -1,10 +1,12 @@
+import { useSnackbar } from "notistack";
 import React, { useContext, useState } from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { useQuery } from "react-query";
-import { getFavMovies, getFavTv, getWatchlistMovies, getWatchlistTv } from "../../Api/UserApi";
+import { getWatchlistMovies, getWatchlistTv } from "../../Api/UserApi";
+import { UserContext } from "../../App";
 import { tabs } from "../../Constants/constants";
 import WhatsOnTrendingLoader from "../Home/Loaders/WhatsOnTrendingLoader";
 import { SideBarContext } from "../Main";
@@ -12,24 +14,25 @@ import UserMovieItem from "./Components/UserMovieItem";
 import UserTvItem from "./Components/UserTvItem";
 
 const Watchlist = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
+  const { currentUser } = useContext(UserContext);
   const { isSideBarExpanded, setisSideBarExpanded } =
     useContext(SideBarContext);
   const sideBarToggle = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const token = JSON.parse(localStorage.getItem("userInfo")).token;
-
   const {
-    isMoviesLoading,
+    isLoading: isMoviesLoading,
     data: movies,
     refetch: moviesRefetch,
-    isMoviesFetching,
+    isRefetching: isMoviesFetching,
+    isError: hasMoviesError,
   } = useQuery(
     ["watchlistMovies"],
     async () => {
-      const { data } = await getWatchlistMovies(token);
+      const { data } = await getWatchlistMovies(currentUser.token);
       return data.results;
     },
     {
@@ -38,20 +41,28 @@ const Watchlist = () => {
   );
 
   const {
-    isTvLoading,
+    isLoading: isTvLoading,
     data: tv,
     refetch: tvRefetch,
-    isTvFetching,
+    isRefetching: isTvFetching,
+    isError: hasTvError,
   } = useQuery(
     ["watchlistTv"],
     async () => {
-      const { data } = await getWatchlistTv(token);
+      const { data } = await getWatchlistTv(currentUser.token);
       return data.results;
     },
     {
       keepPreviousData: true,
     }
   );
+
+  if (hasMoviesError || hasTvError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="relative flex flex-col w-screen h-screen pt-8 px-8 bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">

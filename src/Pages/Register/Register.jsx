@@ -8,10 +8,12 @@ import ParticlesContainer from "./Components/ParticlesContainer";
 import SocialButton from "./Components/SocialButton";
 
 const Register = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  const hasParamsToken = params.has("request_token") ? true : false;
 
   useEffect(() => {
     const getSession = async () => {
@@ -32,7 +34,7 @@ const Register = () => {
     if (params.has("request_token")) {
       getSession();
     }
-  }, [params.has("request_token")]);
+  }, [hasParamsToken]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

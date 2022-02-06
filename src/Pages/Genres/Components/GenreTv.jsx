@@ -12,10 +12,12 @@ import WhatsOnTrendingLoader from "../../Home/Loaders/WhatsOnTrendingLoader";
 import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import { getFilterTv } from "../../../Api/TvApi";
 import ShowItem from "../../../Components/ShowItem";
+import { useSnackbar } from "notistack";
 
 const GenreTv = () => {
   const location = useLocation();
   const { genres } = location.state;
+  const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
 
   const { isSideBarExpanded, setisSideBarExpanded } =
@@ -24,7 +26,7 @@ const GenreTv = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const { isLoading, data, error, isFetching } = useQuery(
+  const { isLoading, data, isRefetching, isError } = useQuery(
     ["genreTv", currentPage, genres],
     async () => {
       const response = await getFilterTv(
@@ -53,6 +55,13 @@ const GenreTv = () => {
     e.preventDefault();
     setCurrentPage((prev) => prev - 1);
   };
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="relative flex flex-col pt-8 px-8 w-screen h-screen bg-white dark:bg-gray-800 overflow-x-hidden overflow-y-scroll scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
@@ -88,7 +97,7 @@ const GenreTv = () => {
       </span>
       {/* Filter results */}
       <div className="flex flex-col w-full h-full">
-        {isLoading || isFetching ? (
+        {isLoading || isRefetching ? (
           <WhatsOnTrendingLoader />
         ) : !data.results.length > 0 ? (
           <div className="flex items-center justify-center">

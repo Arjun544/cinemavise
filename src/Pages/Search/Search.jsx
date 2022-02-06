@@ -25,7 +25,7 @@ const Search = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
-  const { isLoading, data, error, isFetching } = useQuery(
+  const { isLoading, data, isRefetching } = useQuery(
     ["search", currentPage, searchQuery],
     async () => {
       const response = await getSearch(searchQuery, currentPage);
@@ -111,7 +111,7 @@ const Search = () => {
           </div>
         )}
 
-        {(isLoading || isFetching) && searchQuery.length > 3 ? (
+        {(isLoading || isRefetching) && searchQuery.length > 3 ? (
           <WhatsOnTrendingLoader />
         ) : (
           <div className="flex flex-col">

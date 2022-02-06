@@ -1,11 +1,14 @@
 import moment from "moment";
+import { useSnackbar } from "notistack";
 import { RiMovie2Fill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import { getShowReviewsById } from "../../../Api/TvApi";
 import ReviewContent from "./ReviewContent";
 
 const ShowReview = ({ showId }) => {
-  const { isLoading, data, error } = useQuery(
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { isLoading, data, isError } = useQuery(
     ["ShowReviewById", showId],
     async () => {
       const response = await getShowReviewsById(showId);
@@ -29,6 +32,13 @@ const ShowReview = ({ showId }) => {
         </i>
       </div>
     );
+  }
+
+  if (isError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
   }
 
   return (

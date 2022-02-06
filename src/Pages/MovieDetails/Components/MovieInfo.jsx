@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { useSnackbar } from "notistack";
 import {
-  MdClose,
   MdOutlineBookmark,
   MdOutlineBookmarkBorder,
 } from "react-icons/md";
@@ -14,7 +13,6 @@ import {
   addMovieToWatchlist,
   getMovieStatus,
 } from "../../../Api/UserApi";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { UserContext } from "../../../App";
 

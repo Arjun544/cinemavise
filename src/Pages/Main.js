@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import Grow from "@material-ui/core/Grow";

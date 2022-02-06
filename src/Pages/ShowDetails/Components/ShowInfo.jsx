@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { useSnackbar } from "notistack";
 import {
-  MdClose,
   MdOutlineBookmark,
   MdOutlineBookmarkBorder,
 } from "react-icons/md";
@@ -93,7 +92,6 @@ const ShowInfo = ({
 
       {isTrailerPlaying && (
         <div className="absolute flex-col w-full h-full bg-black bg-opacity-70 z-40 ">
-         
           <iframe
             className="rounded-2xl h-full w-full object-cover"
             src={`https://www.youtube.com/embed/${trailer?.[0].key}?autoplay=1&mute=1`}
