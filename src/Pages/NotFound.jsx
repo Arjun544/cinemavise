@@ -46,7 +46,7 @@ const NotFound = () => {
 
         <CustomButton
           text={"GO HOME"}
-          color="bg-blue-100"
+          color="bg-blue-100 dark:bg-slate-400"
           onPressed={'/'}
         ></CustomButton>
       </div>
