@@ -26,7 +26,7 @@ const SideBar = () => {
     <div
       className={`flex flex-col justify-between pt-8 pb-4 h-screen p-4 overflow-hidden bg-slate-50 dark:bg-black ${
         isSideBarExpanded
-          ? "w-20 lg:w-2/12"
+          ? "w-20 lg:w-72 xl:w-80"
           : "w-20 justify-center items-center"
       }  overflow-y-auto transition-all duration-500 ease-in-out`}
     >

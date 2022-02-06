@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import SliderControllers from "../../../Components/SliderControllers";
 import { Link } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { breakPoints } from "../../../Constants/breakPoints";
 
 const WhatsPopular = ({ tabs }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -16,10 +17,10 @@ const WhatsPopular = ({ tabs }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const {
-   isLoading: isMoviesLoading,
+    isLoading: isMoviesLoading,
     data: movies,
     isRefetching: isMovieFetching,
-    isError: hasMoviesError
+    isError: hasMoviesError,
   } = useQuery(
     "popularMovies",
     async () => {
@@ -30,10 +31,10 @@ const WhatsPopular = ({ tabs }) => {
   );
 
   const {
-   isLoading: isShowsLoading,
+    isLoading: isShowsLoading,
     data: shows,
     isRefetching: isShowFetching,
-    isError: hasShowsError
+    isError: hasShowsError,
   } = useQuery(
     "popularShows",
     async () => {
@@ -50,50 +51,7 @@ const WhatsPopular = ({ tabs }) => {
     speed: 500,
     slidesToShow: 5.9,
     slidesToScroll: 5.9,
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-        },
-      },
-      {
-        breakpoint: 1650,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-      {
-        breakpoint: 1280,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    responsive: breakPoints,
   };
 
   if (hasMoviesError || hasShowsError) {
