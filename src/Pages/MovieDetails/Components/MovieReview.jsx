@@ -1,8 +1,8 @@
 import moment from "moment";
 import { useSnackbar } from "notistack";
-import { RiMovie2Fill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import { getMovieReviewsById } from "../../../Api/MoviesApi";
+import WidgetLoader from "../../../Components/WidgetLoader";
 import ReviewContent from "./ReviewContent";
 
 const MovieReview = ({ movieId }) => {
@@ -21,18 +21,7 @@ const MovieReview = ({ movieId }) => {
   );
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
-              fontSize={30}
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {

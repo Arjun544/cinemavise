@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
 import { getShowSimilarById } from "../../../Api/TvApi";
-import { RiMovie2Fill } from "react-icons/ri";
 import ShowItem from "../../../Components/ShowItem";
 import { useSnackbar } from "notistack";
+import WidgetLoader from "../../../Components/WidgetLoader";
 
 const ShowSimilar = ({ showId }) => {
    const { enqueueSnackbar } = useSnackbar();
@@ -29,18 +29,7 @@ const ShowSimilar = ({ showId }) => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
-              fontSize={30}
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {

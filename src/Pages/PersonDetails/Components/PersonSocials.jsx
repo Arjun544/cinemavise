@@ -1,7 +1,8 @@
 import { useSnackbar } from "notistack";
-import { RiInstagramFill, RiMovie2Fill, RiTwitterFill } from "react-icons/ri";
+import { RiInstagramFill, RiTwitterFill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import { getPersonSocials } from "../../../Api/PersonApi";
+import WidgetLoader from "../../../Components/WidgetLoader";
 
 const PersonSocials = ({ personId }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -16,18 +17,7 @@ const PersonSocials = ({ personId }) => {
   );
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
-              fontSize={30}
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {

@@ -1,10 +1,10 @@
 import React from "react";
-import { RiMovie2Fill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import Masonry from "react-masonry-css";
 import { getShowCastById } from "../../../Api/TvApi";
 import PersonItem from "../../Home/Components/PersonItem";
 import { useSnackbar } from "notistack";
+import WidgetLoader from "../../../Components/WidgetLoader";
 
 const ShowCast = ({ showId }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -23,18 +23,7 @@ const ShowCast = ({ showId }) => {
   );
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
-              fontSize={30}
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {

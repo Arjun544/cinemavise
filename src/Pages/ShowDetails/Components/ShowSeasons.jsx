@@ -1,8 +1,9 @@
 import { useSnackbar } from "notistack";
-import { RiMovie2Fill, RiPlayFill } from "react-icons/ri";
+import { RiPlayFill } from "react-icons/ri";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
 import { getShowEpisodes } from "../../../Api/TvApi";
+import WidgetLoader from "../../../Components/WidgetLoader";
 
 const ShowSeasons = ({
   showId,
@@ -27,19 +28,7 @@ const ShowSeasons = ({
   );
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10"
-              fontSize={30}
-              color="#000"
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {

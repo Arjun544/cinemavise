@@ -92,7 +92,7 @@ const SideBar = () => {
             <div className="flex">
               <img
                 className="h-20 w-20"
-                src="/atom.png"
+                src="/atom.jpg"
                 alt=""
                 color={"#fff"}
               />

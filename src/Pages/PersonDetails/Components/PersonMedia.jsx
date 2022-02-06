@@ -1,10 +1,10 @@
-import { RiMovie2Fill } from "react-icons/ri";
 import Masonry from "react-masonry-css";
 import { useQuery } from "react-query";
 import { getPersonMedia } from "../../../Api/PersonApi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useSnackbar } from "notistack";
+import WidgetLoader from "../../../Components/WidgetLoader";
 
 const PersonMedia = ({ personId }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -19,18 +19,7 @@ const PersonMedia = ({ personId }) => {
   );
 
   if (isLoading) {
-    return (
-      <div className="flex w-screen h-full bg-white dark:bg-gray-800 items-center justify-center">
-        <i>
-          {
-            <RiMovie2Fill
-              className="animate-spin animate-ping my-10 fill-black dark:fill-white"
-              fontSize={30}
-            />
-          }
-        </i>
-      </div>
-    );
+    return <WidgetLoader />;
   }
 
   if (isError) {
