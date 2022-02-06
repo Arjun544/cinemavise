@@ -73,7 +73,7 @@ const SideBar = () => {
             } invisible lg:visible flex w-full h-24 rounded-xl items-center justify-around bg-amber-200 shadow-md hover:scale-95 transition-all duration-500 ease-in-out`}
           >
             <div className="flex flex-col justify-around gap-2">
-              <span className="font-semibold  text-black tracking-widest capitalize">
+              <span className="font-semibold  text-black text-sm tracking-widest capitalize">
                 {currentUser.isLogin ? currentUser.username : "Explore more"}
               </span>
               <Link
