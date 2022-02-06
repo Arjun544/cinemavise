@@ -29,6 +29,7 @@ const MovieDetails = () => {
     setisSideBarExpanded((presState) => !presState);
   };
 
+
   const {
     isLoading: isMovieLoading,
     isRefetching: isMovieBgLoading,
@@ -171,13 +172,13 @@ const MovieDetails = () => {
         {(() => {
           switch (selectedTab) {
             case 0:
-              return <MovieCast movieId={movie?.id} />;
+              return <MovieCast movieId={movieId} />;
             case 1:
               return <MovieMedia media={media} />;
             case 2:
-              return <MovieSimilar movieId={movie?.id} />;
+              return <MovieSimilar movieId={movieId} />;
             case 3:
-              return <MovieReview movieId={movie?.id} />;
+              return <MovieReview movieId={movieId} />;
 
             default:
               return;

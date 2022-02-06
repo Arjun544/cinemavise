@@ -46,14 +46,16 @@ const ShowSimilar = ({ showId }) => {
         className="flex animate-slide-fwd w-full"
         breakpointCols={{
           default: 4,
-          3000: 8,
-          2000: 6,
+          3000: 6,
+          1900: 5,
+          1500: 4,
           1200: 3,
           1000: 2,
           500: 1,
         }}
       >
-        {!isLoading && data.results.map((show) => <ShowItem show={show} isBottom={true} />)}
+        {!isLoading &&
+          data.results.map((show) => <ShowItem show={show} isBottom={true} />)}
       </Masonry>
       {/* Pagination */}
       <div className="flex items-center justify-center my-6 gap-2">

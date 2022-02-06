@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { useSnackbar } from "notistack";
-import {
-  MdOutlineBookmark,
-  MdOutlineBookmarkBorder,
-} from "react-icons/md";
+import { MdOutlineBookmark, MdOutlineBookmarkBorder } from "react-icons/md";
 import { RiHeartFill, RiHeartLine, RiPlayFill } from "react-icons/ri";
 import { calcTime } from "../../../Hooks/useCalcTime";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   addTvToFav,
   addTvToWatchlist,
@@ -23,6 +20,8 @@ const ShowInfo = ({
   isTrailerPlaying,
   setIsTrailerPlaying,
 }) => {
+  const params = useParams();
+  const showId = params.id;
   const { enqueueSnackbar } = useSnackbar();
   const { currentUser } = useContext(UserContext);
   const [isFav, setIsFav] = useState(false);
@@ -30,9 +29,16 @@ const ShowInfo = ({
 
   useEffect(() => {
     const getStatus = async () => {
-      const { data } = await getTvStatus(show.id, currentUser.token);
-      setIsFav(data.favorite);
-      setIsInWatchlist(data.watchlist);
+      try {
+        const { data } = await getTvStatus(showId, currentUser.token);
+        setIsFav(data.favorite);
+        setIsInWatchlist(data.watchlist);
+      } catch (error) {
+        enqueueSnackbar("Something went wrong", {
+          variant: "error",
+          autoHideDuration: 2000,
+        });
+      }
     };
     if (currentUser.isLogin === true) {
       getStatus();
@@ -84,11 +90,16 @@ const ShowInfo = ({
   return (
     <div className="relative flex flex-col md:h-2/5 w-full my-5">
       <ReactTooltip />
-      <img
-        className="w-full h-full object-cover blur-sm"
-        src={`https://image.tmdb.org/t/p/w300/${show?.backdrop_path}`}
-        alt="show poster"
-      />
+
+      {show?.backdrop_path === null ? (
+        <div className="w-full h-full bg-slate-200 dark:bg-slate-600"></div>
+      ) : (
+        <img
+          className="w-full h-full object-cover blur-sm"
+          src={`https://image.tmdb.org/t/p/w300/${show?.backdrop_path}`}
+          alt="show poster"
+        />
+      )}
 
       {isTrailerPlaying && (
         <div className="absolute flex-col w-full h-full bg-black bg-opacity-70 z-40 ">
@@ -102,11 +113,19 @@ const ShowInfo = ({
       )}
 
       <div className="absolute flex w-full h-full bg-opacity-20">
-        <img
-          className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/w342/${show?.poster_path}`}
-          alt="show poster"
-        />
+        {show?.poster_path === null ? (
+          <div className="hidden md:flex w-52 items-center justify-center m-4 rounded-3xl bg-slate-200 dark:bg-slate-700">
+            <span className="text-black dark:text-white tracking-widest text-sm">
+              No image
+            </span>
+          </div>
+        ) : (
+          <img
+            className="hidden md:flex h-full p-4 rounded-3xl"
+            src={`https://image.tmdb.org/t/p/w342/${show?.poster_path}`}
+            alt="show poster"
+          />
+        )}
         <div className="flex flex-col my-4 px-4 md:px-0">
           <span className="text-white font-semibold text-lg md:text-2xl tracking-wider">
             {show?.original_name}
@@ -210,8 +229,9 @@ const ShowInfo = ({
                 to={`/watch/${show?.id}`}
                 state={{
                   type: "tv",
-                  season: selectedSeason + 1,
-                  episode: selectedEpisode + 1,
+                  season: selectedSeason,
+                  episode: selectedEpisode,
+                  seasons: show?.seasons,
                 }}
               >
                 <div className="flex h-10 px-3 gap-2 bg-green-500 rounded-lg items-center justify-center cursor-pointer tranform hover:scale-95 transition-all duration-1000 ease-in-out">

@@ -20,7 +20,7 @@ import { useSnackbar } from "notistack";
 const tabs = ["Seasons", "Cast", "Media", "Similar", "Reviews"];
 
 const ShowDetails = () => {
-   const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedTab, setSelectedTab] = useState(0);
   const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
   const [selectedSeason, setselectedSeason] = useState(0);
@@ -36,7 +36,7 @@ const ShowDetails = () => {
     isLoading: isShowLoading,
     isRefetching: isShowBgLoading,
     data: show,
-    isError: hasShowError
+    isError: hasShowError,
   } = useQuery(["showById", showId], async () => {
     const response = await getShowById(showId);
     return response.data;
@@ -46,7 +46,7 @@ const ShowDetails = () => {
     isLoading: isMediaLoading,
     isRefetching: isMediaBgLoading,
     data: media,
-    isError: hasMediaError
+    isError: hasMediaError,
   } = useQuery(
     ["showMediaById", showId],
     async () => {
@@ -54,18 +54,18 @@ const ShowDetails = () => {
       return response.data.results;
     },
     { keepPreviousData: true }
-  );
+    );
 
   if (isShowLoading && isMediaLoading && isShowBgLoading && isMediaBgLoading) {
     return <MovieDetailsLoader />;
   }
 
-   if (hasMediaError || hasShowError) {
-     enqueueSnackbar("Something went wrong", {
-       variant: "error",
-       autoHideDuration: 2000,
-     });
-   }
+  if (hasMediaError || hasShowError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
@@ -175,7 +175,7 @@ const ShowDetails = () => {
             case 0:
               return (
                 <ShowSeasons
-                  showId={show?.id}
+                  showId={showId}
                   seasons={show?.seasons}
                   selectedSeason={selectedSeason}
                   setselectedSeason={setselectedSeason}
@@ -184,13 +184,13 @@ const ShowDetails = () => {
                 />
               );
             case 1:
-              return <ShowCast showId={show?.id} />;
+              return <ShowCast showId={showId} />;
             case 2:
               return <ShowMedia media={media} />;
             case 3:
-              return <ShowSimilar showId={show?.id} />;
+              return <ShowSimilar showId={showId} />;
             case 4:
-              return <ShowReview showId={show?.id} />;
+              return <ShowReview showId={showId} />;
 
             default:
               return;

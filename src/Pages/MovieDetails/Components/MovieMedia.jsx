@@ -8,8 +8,9 @@ const MovieMedia = ({ media }) => {
         className="flex animate-slide-fwd"
         breakpointCols={{
           default: 4,
-          3000: 8,
-          2000: 6,
+          3000: 6,
+          1900: 5,
+          1500: 4,
           1200: 3,
           1000: 2,
           500: 1,

@@ -54,6 +54,21 @@ const WhatsOnTrending = ({ tabs }) => {
     slidesToScroll: 5.9,
     responsive: [
       {
+        breakpoint: 1920,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
+      {
+        breakpoint: 1650,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+
+      {
         breakpoint: 1280,
         settings: {
           slidesToShow: 3,

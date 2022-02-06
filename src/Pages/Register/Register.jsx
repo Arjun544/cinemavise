@@ -43,7 +43,7 @@ const Register = () => {
       const { data } = await getRequestToken();
 
       window.open(
-        `https://www.themoviedb.org/authenticate/${data.request_token}?redirect_to=http://localhost:3000/login`,
+        `https://www.themoviedb.org/authenticate/${data.request_token}?redirect_to=https://cinemavise.herokuapp.com/login`,
         "_self",
         "toolbar=0,status=0,width=1000,height=600, top=100"
       );

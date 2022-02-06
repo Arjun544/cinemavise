@@ -3,11 +3,20 @@ const PersonInfo = ({ person }) => {
   return (
     <div className="flex flex-col h-2/5 w-full my-10">
       <div className=" flex w-full h-full bg-sky-50 dark:bg-slate-700">
-        <img
-          className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/original/${person?.profile_path}`}
-          alt="profile profile"
-        />
+        {person?.profile_path === null ? (
+          <div className="hidden md:flex w-52 items-center justify-center m-4 rounded-3xl bg-slate-200 dark:bg-slate-600">
+            <span className="text-black dark:text-white tracking-widest text-sm">
+              No image
+            </span>
+          </div>
+        ) : (
+          <img
+            className="hidden md:flex h-full p-4 rounded-3xl"
+            src={`https://image.tmdb.org/t/p/w300/${person?.profile_path}`}
+            alt="profile profile"
+          />
+        )}
+
         <div className="flex flex-col my-4 px-4 md:px-0">
           <span className="text-black dark:text-white font-semibold text-lg md:text-2xl tracking-wider">
             {person?.name}

@@ -12,25 +12,30 @@ const MovieItem = ({ movie, isBottom = false }) => {
         key={movie.id}
         onMouseEnter={() => setisHovered(true)}
         onMouseLeave={() => setisHovered(false)}
-        className={`cursor-pointer relative ${isBottom && "mb-6"}`}
+        className={`flex cursor-pointer relative ${isBottom && "mb-6"} `}
       >
         <div className="w-52 md:w-60 h-full">
-          <LazyLoadImage
-            className="w-full rounded-xl transform hover:scale-95 transition-all duration-300 ease-in-out"
-            src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
-            alt="movie poster"
-            effect="blur"
-          />
+          {movie.poster_path === null ? (
+            <div className="flex items-center justify-center h-80 w-full bg-slate-200 dark:bg-slate-700 rounded-xl transform hover:scale-95 transition-all duration-300 ease-in-out">
+              <span className="text-black dark:text-white tracking-widest text-sm">
+                No image
+              </span>
+            </div>
+          ) : (
+            <LazyLoadImage
+              className="w-full rounded-xl transform hover:scale-95 transition-all duration-300 ease-in-out"
+              src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+              alt="movie poster"
+              effect="blur"
+            />
+          )}
           {isHovered && (
-            <div className="absolute z-20 flex flex-col justify-between top-40 ml-28 px-4 py-4 rounded-xl h-48 w-96 bg-black">
-              <div className="flex w-full justify-between">
-                <span className="text-white tracking-wider">
-                  {movie?.original_title}
-                </span>
-                <RiHeartFill fontSize={20} />
-              </div>
+            <div className="absolute z-20 flex flex-col justify-between top-40 ml-4 px-4 py-4 rounded-xl h-36 md:h-48 w-96 bg-black">
+              <span className="text-white tracking-wider">
+                {movie?.original_title}
+              </span>
 
-              <span className="text-white text-sm line-clamp-4">
+              <span className="text-white text-sm line-clamp-2 md:line-clamp-4">
                 {movie?.overview}
               </span>
               <div className="flex w-full items-center justify-between">

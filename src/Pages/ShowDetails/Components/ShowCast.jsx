@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import Masonry from "react-masonry-css";
 import { getShowCastById } from "../../../Api/TvApi";
-import PersonItem from "../../Home/Components/PersonItem";
+import PersonItem from "../../../Components/PersonItem";
 import { useSnackbar } from "notistack";
 import WidgetLoader from "../../../Components/WidgetLoader";
 
@@ -39,8 +39,9 @@ const ShowCast = ({ showId }) => {
         className="flex animate-slide-fwd"
         breakpointCols={{
           default: 4,
-          3000: 8,
-          2000: 6,
+          3000: 6,
+          1900: 5,
+          1500: 4,
           1200: 3,
           1000: 2,
           500: 1,

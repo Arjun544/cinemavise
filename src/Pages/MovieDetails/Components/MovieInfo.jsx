@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { useSnackbar } from "notistack";
-import {
-  MdOutlineBookmark,
-  MdOutlineBookmarkBorder,
-} from "react-icons/md";
+import { MdOutlineBookmark, MdOutlineBookmarkBorder } from "react-icons/md";
 import { RiHeartFill, RiHeartLine, RiPlayFill } from "react-icons/ri";
 import { calcTime } from "../../../Hooks/useCalcTime";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   addMovieToFav,
   addMovieToWatchlist,
@@ -22,6 +19,8 @@ const MovieInfo = ({
   isTrailerPlaying,
   setIsTrailerPlaying,
 }) => {
+  const params = useParams();
+  const movieId = params.id;
   const { currentUser } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
   const [isFav, setIsFav] = useState(false);
@@ -29,7 +28,7 @@ const MovieInfo = ({
 
   useEffect(() => {
     const getStatus = async () => {
-      const { data } = await getMovieStatus(movie.id, currentUser.token);
+      const { data } = await getMovieStatus(movieId, currentUser.token);
       setIsFav(data.favorite);
       setisInWatchlist(data.watchlist);
     };
@@ -86,11 +85,15 @@ const MovieInfo = ({
   return (
     <div className="relative flex flex-col md:h-2/5 w-full mt-5 mb-5">
       <ReactTooltip />
-      <img
-        className="w-full h-full object-cover blur-sm"
-        src={`https://image.tmdb.org/t/p/w300/${movie?.backdrop_path}`}
-        alt="movie poster"
-      />
+      {movie?.backdrop_path === null ? (
+        <div className="w-full h-full bg-slate-200 dark:bg-slate-600"></div>
+      ) : (
+        <img
+          className="w-full h-full object-cover blur-sm"
+          src={`https://image.tmdb.org/t/p/w300/${movie?.backdrop_path}`}
+          alt="movie poster"
+        />
+      )}
 
       {isTrailerPlaying && (
         <div className="absolute flex-col w-full h-full bg-black bg-opacity-70 z-40">
@@ -104,11 +107,19 @@ const MovieInfo = ({
       )}
 
       <div className="absolute flex w-full h-full bg-opacity-20">
-        <img
-          className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
-          alt="movie poster"
-        />
+        {movie?.poster_path === null ? (
+          <div className="hidden md:flex w-52 items-center justify-center m-4 rounded-3xl bg-slate-200 dark:bg-slate-700">
+            <span className="text-black dark:text-white tracking-widest text-sm">
+              No image
+            </span>
+          </div>
+        ) : (
+          <img
+            className="hidden md:flex h-full p-4 rounded-3xl"
+            src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
+            alt="movie poster"
+          />
+        )}
         <div className="flex flex-col my-4 px-4 md:px-0">
           <span className="text-white font-semibold text-lg md:text-2xl tracking-wider">
             {movie?.original_title}

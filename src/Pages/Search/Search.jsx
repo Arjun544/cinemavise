@@ -10,7 +10,7 @@ import { getSearch } from "../../Api/SearchApi";
 import { SideBarContext } from "../Main";
 import MovieItem from "../../Components/MovieItem";
 import ShowItem from "../../Components/ShowItem";
-import PersonItem from "../Home/Components/PersonItem";
+import PersonItem from "../../Components/PersonItem";
 import WhatsOnTrendingLoader from "../Home/Loaders/WhatsOnTrendingLoader";
 
 const Search = () => {
@@ -85,7 +85,7 @@ const Search = () => {
             <RiSearch2Fill className="text-slate-400" fontSize={25} />
             <input
               className="w-full h-full bg-slate-100 dark:bg-slate-700  pl-6 tracking-wider shadow-sm text-black rounded-lg  placeholder:text-slate-400 placeholder:text-sm focus:outline-none focus:shadow-outline dark:text-white"
-              placeholder="Search movie & show"
+              placeholder="Search movie, show & person"
               value={searchQuery}
               onChange={(e) => handleSearch(e)}
             ></input>
@@ -117,10 +117,10 @@ const Search = () => {
           <div className="flex flex-col">
             {data && (
               <div className="flex items-center gap-1 mb-6">
-                <span className="text-black tracking-wide">
+                <span className="text-black dark:text-white tracking-wide">
                   Search results for
                 </span>
-                <span className="text-black font-semibold tracking-wide">
+                <span className="text-black dark:text-white font-semibold tracking-wide">
                   "{currentSearch}"
                 </span>
               </div>
@@ -137,8 +137,9 @@ const Search = () => {
                 className="flex animate-slide-fwd w-full"
                 breakpointCols={{
                   default: 4,
-                  3000: 8,
-                  2000: 6,
+                  3000: 6,
+                  1900: 5,
+                  1500: 4,
                   1200: 3,
                   1000: 2,
                   500: 1,
