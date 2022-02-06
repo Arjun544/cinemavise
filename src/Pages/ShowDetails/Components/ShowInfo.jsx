@@ -86,7 +86,7 @@ const ShowInfo = ({
       <ReactTooltip />
       <img
         className="w-full h-full object-cover blur-sm"
-        src={`https://image.tmdb.org/t/p/original/${show?.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/w300/${show?.backdrop_path}`}
         alt="show poster"
       />
 
@@ -104,7 +104,7 @@ const ShowInfo = ({
       <div className="absolute flex w-full h-full bg-opacity-20">
         <img
           className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w342/${show?.poster_path}`}
           alt="show poster"
         />
         <div className="flex flex-col my-4 px-4 md:px-0">

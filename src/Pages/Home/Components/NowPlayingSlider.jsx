@@ -83,7 +83,7 @@ const NowPlayingSlider = () => {
                   <div
                     className=" flex flex-col h-64 w-full justify-end p-6 bg-center bg-cover shadow-lg rounded-3xl cursor-pointer tranform hover:scale-95 transition-all duration-1000 ease-in-out"
                     style={{
-                      backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
+                      backgroundImage: `url(https://image.tmdb.org/t/p/w780/${movie.backdrop_path})`,
                     }}
                   >
                     <span className="text-white font-bold tracking-wider ">

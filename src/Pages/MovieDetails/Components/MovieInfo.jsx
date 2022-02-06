@@ -88,7 +88,7 @@ const MovieInfo = ({
       <ReactTooltip />
       <img
         className="w-full h-full object-cover blur-sm"
-        src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/w300/${movie?.backdrop_path}`}
         alt="movie poster"
       />
 
@@ -106,7 +106,7 @@ const MovieInfo = ({
       <div className="absolute flex w-full h-full bg-opacity-20">
         <img
           className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
           alt="movie poster"
         />
         <div className="flex flex-col my-4 px-4 md:px-0">

@@ -49,7 +49,7 @@ const UserTvItem = ({ tv, refetch, isFromFav }) => {
       <div className="absolute flex w-full h-full bg-opacity-20 rounded-2xl">
         <img
           className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/original/${tv?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w300/${tv?.poster_path}`}
           alt="movie poster"
         />
         <div className="flex flex-col my-4 px-4 md:px-0">

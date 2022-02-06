@@ -1,12 +1,12 @@
 import "./App.css";
-
+import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import Register from "./Pages/Register/Register";
 import Main from "./Pages/Main";
-import { createContext, useEffect, useState } from "react";
+import WidgetLoader from "./Components/WidgetLoader";
+
+const Register = lazy(() => import("./Pages/Register/Register"));
 
 export const UserContext = createContext(null);
 
@@ -18,8 +18,8 @@ function App() {
     } else {
       return {
         isLogin: false,
-        token: '',
-        username: '',
+        token: "",
+        username: "",
       };
     }
   });
@@ -32,7 +32,14 @@ function App() {
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className="h-screen w-screen">
         <Routes>
-          <Route path="/login" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<WidgetLoader />}>
+                <Register />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<Main />} />
         </Routes>
       </div>

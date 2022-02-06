@@ -40,14 +40,14 @@ const UserMovieItem = ({ movie, refetch, isFromFav }) => {
     >
       <img
         className=" w-full h-full object-cover blur-sm rounded-2xl"
-        src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/w300/${movie?.backdrop_path}`}
         alt="movie poster"
       />
 
       <div className="absolute flex w-full h-full bg-opacity-20 rounded-2xl">
         <img
           className="hidden md:flex h-full p-4 rounded-3xl"
-          src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w342/${movie?.poster_path}`}
           alt="movie poster"
         />
         <div className="flex flex-col my-4 px-4 md:px-0">
@@ -82,7 +82,9 @@ const UserMovieItem = ({ movie, refetch, isFromFav }) => {
             <span className="hidden md:flex text-md tracking-wider text-slate-300">
               {movie?.tagline}
             </span>
-            <span className="hidden md:flex font-bold text-white">Overview</span>
+            <span className="hidden md:flex font-bold text-white">
+              Overview
+            </span>
             <span className="text-sm tracking-wider text-white">
               {movie?.overview}
             </span>

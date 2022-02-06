@@ -16,9 +16,9 @@ const PersonItem = ({ person, isBottom = false }) => {
           <div className="w-52 md:w-60 h-full">
             <LazyLoadImage
               className=" w-full rounded-xl h-80 transform hover:scale-95 transition-all duration-300 ease-in-out"
-              src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+              src={`https://image.tmdb.org/t/p/w185/${person.profile_path}`}
               alt="movie poster"
-              effect='blur'
+              effect="blur"
             />
             {isHovered && (
               <div className="absolute z-20 flex flex-col justify-between top-44 ml-36 px-4 py-4 rounded-xl h-32 w-64 bg-black">

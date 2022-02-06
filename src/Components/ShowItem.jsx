@@ -17,7 +17,7 @@ const ShowItem = ({ show, isBottom = false }) => {
         <div className="w-52 md:w-60 h-full ">
           <LazyLoadImage
             className=" w-full rounded-xl object-cover transform hover:scale-95 transition-all duration-300 ease-in-out"
-            src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w342/${show.poster_path}`}
             alt="show poster"
             effect="blur"
           />

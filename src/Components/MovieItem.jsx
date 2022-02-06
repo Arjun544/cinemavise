@@ -17,7 +17,7 @@ const MovieItem = ({ movie, isBottom = false }) => {
         <div className="w-52 md:w-60 h-full">
           <LazyLoadImage
             className="w-full rounded-xl transform hover:scale-95 transition-all duration-300 ease-in-out"
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
             alt="movie poster"
             effect="blur"
           />
