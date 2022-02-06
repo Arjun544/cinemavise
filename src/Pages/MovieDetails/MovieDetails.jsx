@@ -7,7 +7,6 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { SideBarContext } from "../Main";
-import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import MovieInfo from "./Components/MovieInfo";
 import { useQuery } from "react-query";
 import MovieMedia from "./Components/MovieMedia";
@@ -34,7 +33,7 @@ const MovieDetails = () => {
     isLoading: isMovieLoading,
     isRefetching: isMovieBgLoading,
     data: movie,
-    isError: hasMovieError
+    isError: hasMovieError,
   } = useQuery(["movieById", movieId], async () => {
     const response = await getMovieById(movieId);
     return response.data;
@@ -44,7 +43,7 @@ const MovieDetails = () => {
     isLoading: isMediaLoading,
     isRefetching: isMediaBgLoading,
     data: media,
-    isError: hasMediaError
+    isError: hasMediaError,
   } = useQuery(
     ["movieMediaById", movieId],
     async () => {
@@ -63,12 +62,12 @@ const MovieDetails = () => {
     return <MovieDetailsLoader />;
   }
 
-   if (hasMovieError || hasMediaError) {
-     enqueueSnackbar("Something went wrong", {
-       variant: "error",
-       autoHideDuration: 2000,
-     });
-   }
+  if (hasMovieError || hasMediaError) {
+    enqueueSnackbar("Something went wrong", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
 
   return (
     <div className="relative z-10 flex w-full min-h-screen bg-white dark:bg-gray-800 overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
@@ -94,14 +93,22 @@ const MovieDetails = () => {
         </i>
       </div>
       <div className="flex flex-col w-full h-full">
-        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-14 mt-10">
+        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-4 md:pl-14 mt-10">
+          {/* Breadcrumbs */}
           <div className="flex items-center">
-            <Breadcrumbs>
-              <Link to={"/movies"}>
-                <Breadcrumb label="Movies" />
-              </Link>
-              <Breadcrumb label={movie?.original_title} />
-            </Breadcrumbs>
+            <Link to={"/movies"} className="flex items-center gap-3 ">
+              <div className=" hover:scale-90 transition-all duration-300 ease-in-out hover:mt-1 ">
+                <span className="text-black text-sm tracking-widest dark:text-white hover:text-blue-600">
+                  Movies
+                </span>
+              </div>
+              <span className="text-black font-bold mt-1 tracking-widest dark:text-white ">
+                {">"}
+              </span>
+              <span className="text-black mt-1 text-sm tracking-wider dark:text-white font-bold ">
+                {movie?.original_title}
+              </span>
+            </Link>
           </div>
           {/* Trailer playing icon */}
           {isTrailerPlaying && (

@@ -11,7 +11,6 @@ import MovieItem from "../../../Components/MovieItem";
 import { movieSorts } from "../../../Constants/constants";
 import { getFilterMovies } from "../../../Api/MoviesApi";
 import WhatsOnTrendingLoader from "../../Home/Loaders/WhatsOnTrendingLoader";
-import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import { useSnackbar } from "notistack";
 
 const GenreMovies = () => {
@@ -84,13 +83,21 @@ const GenreMovies = () => {
           )}
         </i>
       </div>
+      {/* Breadcrumbs */}
       <div className="flex pl-8 mt-2 mb-10">
-        <Breadcrumbs>
-          <Link to={"/genres"}>
-            <Breadcrumb label="Movie Genres" />
-          </Link>
-          <Breadcrumb label={genres.map((item) => item.name).join(", ")} />
-        </Breadcrumbs>
+        <Link to={"/genres"} className="flex items-center gap-3 ">
+          <div className=" hover:scale-90 transition-all duration-300 ease-in-out hover:mt-1 ">
+            <span className="text-black text-sm tracking-widest dark:text-white hover:text-blue-600">
+              Movie Genres
+            </span>
+          </div>
+          <span className="text-black font-bold mt-1 tracking-widest dark:text-white ">
+            {">"}
+          </span>
+          <span className="text-black mt-1 text-sm tracking-wider dark:text-white font-bold ">
+            {genres.map((item) => item.name).join(", ")}
+          </span>
+        </Link>
       </div>
       <span className="text-black dark:text-white tracking-wide pb-4 lg:mb-0">
         Filter results

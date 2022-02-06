@@ -6,7 +6,6 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { SideBarContext } from "../Main";
-import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import ShowInfo from "./Components/ShowInfo";
 import { useQuery } from "react-query";
 import { getShowById, getShowMediaById } from "../../Api/TvApi";
@@ -92,14 +91,22 @@ const ShowDetails = () => {
         </i>
       </div>
       <div className="flex flex-col w-full h-full">
-        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-14 mt-10">
+        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-4 md:pl-14 mt-10">
+          {/* Breadcrumbs */}
           <div className="flex items-center">
-            <Breadcrumbs>
-              <Link to={"/tv"}>
-                <Breadcrumb label="Tv" />
-              </Link>
-              <Breadcrumb label={show?.original_name} />
-            </Breadcrumbs>
+            <Link to={"/tv"} className="flex items-center gap-3 ">
+              <div className=" hover:scale-90 transition-all duration-300 ease-in-out hover:mt-1 ">
+                <span className="text-black text-sm tracking-widest dark:text-white hover:text-blue-600">
+                  Tv
+                </span>
+              </div>
+              <span className="text-black font-bold mt-1 tracking-widest dark:text-white ">
+                {">"}
+              </span>
+              <span className="text-black mt-1 text-sm tracking-wider dark:text-white font-bold ">
+                {show?.original_name}
+              </span>
+            </Link>
           </div>
           {/* Trailer playing icon */}
           {isTrailerPlaying && (

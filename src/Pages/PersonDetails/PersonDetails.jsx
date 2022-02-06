@@ -3,7 +3,6 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import { Breadcrumb, Breadcrumbs } from "react-rainbow-components";
 import { useQuery } from "react-query";
 import { getPersonById } from "../../Api/PersonApi";
 import PersonInfo from "./Components/PersonInfo";
@@ -72,9 +71,9 @@ const PersonDetails = () => {
       </div>
       <div className="flex flex-col w-full h-full">
         <div className="flex pl-14 mt-10">
-          <Breadcrumbs>
-            <Breadcrumb label={data?.name} />
-          </Breadcrumbs>
+          <span className="text-black mt-1 text-sm tracking-wider dark:text-white font-bold ">
+            {data?.name}
+          </span>
         </div>
         <PersonInfo person={data} />
         {/* Tabs */}
