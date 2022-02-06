@@ -6,6 +6,7 @@ import useDarkMode from "../Hooks/useDarkMode";
 import SideBar from "../Components/SideBar";
 import WidgetLoader from "../Components/WidgetLoader";
 import NoAccess from "./NoAccess";
+import NotFound from "./NotFound";
 
 const Home = lazy(() => import("./Home/Home"));
 const Search = lazy(() => import("./Search/Search"));
@@ -147,6 +148,7 @@ const Main = () => {
               }
             />
             <Route path="/noAccess" element={<NoAccess />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </SideBarContext.Provider>
