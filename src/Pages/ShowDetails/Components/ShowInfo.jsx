@@ -151,7 +151,7 @@ const ShowInfo = ({
             </span>
           </div>
           {/* Add ratings */}
-          <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-0">
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-3 my-4">
               <div className="flex h-10 w-10 bg-green-400 rounded-lg items-center justify-center">
                 <span className="text-white text-sm tracking-wider">
@@ -255,7 +255,7 @@ const ShowInfo = ({
             <span className="hidden md:flex font-bold text-white">
               Overview
             </span>
-            <span className="text-sm tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none">
+            <span className="text-sm tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none overflow-y-auto">
               {show?.overview}
             </span>
           </div>

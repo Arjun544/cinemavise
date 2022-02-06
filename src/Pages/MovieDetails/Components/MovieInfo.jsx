@@ -144,7 +144,7 @@ const MovieInfo = ({
               {calcTime(movie?.runtime)}
             </span>
           </div>
-          <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-0">
+          <div className="flex items-center gap-4 b">
             <div className="flex items-center gap-3 my-4">
               <div className="flex h-10 w-10 bg-green-400 rounded-lg items-center justify-center">
                 <span className="text-white text-sm tracking-wider">
@@ -234,14 +234,14 @@ const MovieInfo = ({
           </div>
 
           {/* Overview */}
-          <div className="flex flex-col gap-2 w-full mt-0 md:mt-6">
+          <div className="flex flex-col gap-2 w-full mt-0 md:mt-2">
             <span className="text-md tracking-wider text-slate-300">
               {movie?.tagline}
             </span>
             <span className="hidden md:flex font-bold text-white">
               Overview
             </span>
-            <span className="text-sm tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none">
+            <span className="text-sm tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none overflow-y-auto">
               {movie?.overview}
             </span>
           </div>
