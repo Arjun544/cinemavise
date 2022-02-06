@@ -39,7 +39,7 @@ const NotFound = () => {
           <span className="text-blue-400 font-extrabold tracking-widest text-8xl animate-pulse">
             404
           </span>
-          <span className="text-black font-extrabold tracking-widest text-lg">
+          <span className="text-black dark:text-white font-extrabold tracking-widest text-lg">
             Page Not Found
           </span>
         </div>
