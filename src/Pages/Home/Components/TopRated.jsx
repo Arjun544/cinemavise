@@ -106,7 +106,7 @@ const TopRated = ({ tabs }) => {
       isShowFetching ? (
         <WhatsOnTrendingLoader />
       ) : (
-        <div className="flex flex-col my-6 ml-6">
+        <div className="flex flex-col my-6 ml-4 mr-3 ">
           <Masonry
             className=" flex animate-slide-fwd w-full "
             breakpointCols={{

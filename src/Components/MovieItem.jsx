@@ -12,7 +12,7 @@ const MovieItem = ({ movie, isBottom = false }) => {
         key={movie.id}
         onMouseEnter={() => setisHovered(true)}
         onMouseLeave={() => setisHovered(false)}
-        className={`flex cursor-pointer relative ${isBottom && "mb-6"} `}
+        className={`flex cursor-pointer relative ${isBottom && "mb-3"} `}
       >
         <div className="w-52 md:w-60 h-full">
           {movie.poster_path === null ? (
