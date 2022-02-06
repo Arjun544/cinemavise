@@ -107,7 +107,7 @@ const Genres = () => {
         <span className="mt-4 text-black dark:text-white">{`${
           selectedTab === 0 ? "Movies genres" : "Tv genres"
         }`}</span>
-        <span className="mb-12 text-xs text-slate-500 dark:text-slate-300">
+        <span className="mb-8 text-xs text-slate-500 dark:text-slate-300">
           Select one or more than one genres
         </span>
       </div>
@@ -302,7 +302,7 @@ const Genres = () => {
       >
         <button
           disabled={selectedGenres.length === 0}
-          className="bg-black h-10 w-24 mt-12 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:dark:bg-gray-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
+          className="bg-black h-10 w-24 mt-12 mb-4 rounded-md text-sm text-white font-semibold tracking-wider disabled:bg-gray-300 disabled:dark:bg-gray-700 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-500 ease-in-out"
         >
           Filter
         </button>

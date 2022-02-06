@@ -129,7 +129,7 @@ const Tv = () => {
         </div>
       </div>
       {/* Buttons */}
-      <div className="flex flex-col lg:flex-row items-center justify-between my-4 lg:my-8">
+      <div className="flex flex-col lg:flex-row items-center justify-between my-4 lg:my-6">
         <span className="text-black tracking-wide mb-4 lg:mb-0">
           Filter results
         </span>

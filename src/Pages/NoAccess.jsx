@@ -46,7 +46,7 @@ const NoAccess = () => {
       {/* Dialogue */}
       <div className="flex flex-col h-1/4 w-3/4 md:w-1/4 rounded-2xl items-center justify-around bg-slate-100 dark:bg-slate-700 shadow-sm">
         <div className="flex flex-col gap-2 items-center">
-          <span className="font-semibold dark:text-white tracking-wider">Access denied</span>
+          <span className="font-semibold text-black dark:text-white tracking-wider">Access denied</span>
           <span className="font-semibold text-gray-400 tracking-wider">
             Please sign in to continue
           </span>

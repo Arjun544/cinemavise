@@ -58,7 +58,7 @@ const TopRated = ({ tabs }) => {
   }
 
   return (
-    <div className="flex flex-col w-full mt-6">
+    <div className="flex flex-col w-full mt-2">
       <div className="flex justify-between mx-6">
         <div className="flex items-center gap-8">
           <span className="text-black dark:text-white text-xl tracking-wide">
