@@ -51,7 +51,7 @@ const PersonDetails = () => {
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`invisible lg:visible absolute z-30 top-10 ${
+        className={`invisible lg:visible absolute z-30 top-5 ${
           isSdeBarExpanded ? "-left-3" : "left-3"
         } flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >

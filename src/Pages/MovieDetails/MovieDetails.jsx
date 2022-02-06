@@ -75,7 +75,7 @@ const MovieDetails = () => {
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`invisible lg:visible absolute z-30 top-10 ${
+        className={`invisible lg:visible absolute z-30 top-5 ${
           isSdeBarExpanded ? "-left-3" : "left-3"
         } flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
@@ -94,7 +94,7 @@ const MovieDetails = () => {
         </i>
       </div>
       <div className="flex flex-col w-full h-full">
-        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-4 md:pl-14 mt-10">
+        <div className="flex flex-col items-start md:flex-row md:items-center justify-between pl-4 md:pl-14 mt-4">
           {/* Breadcrumbs */}
           <div className="flex items-center">
             <Link to={"/movies"} className="flex items-center gap-3 ">

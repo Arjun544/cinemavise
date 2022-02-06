@@ -252,10 +252,7 @@ const ShowInfo = ({
             <span className="text-md tracking-wider text-slate-300">
               {show?.tagline}
             </span>
-            <span className="hidden md:flex font-bold text-white">
-              Overview
-            </span>
-            <span className="text-sm tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none overflow-y-auto">
+            <span className="text-sm pr-3 tracking-wider text-white line-clamp-3 md:line-clamp-4 lg:line-clamp-none overflow-y-auto">
               {show?.overview}
             </span>
           </div>

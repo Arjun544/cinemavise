@@ -82,7 +82,7 @@ const Movies = () => {
       {/* Collapse sidebar icon */}
       <div
         onClick={sideBarToggle}
-        className={`absolute z-50 top-10 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
+        className={`absolute z-50 top-5 left-3 flex items-center justify-center h-6 w-6 bg-white dark:bg-gray-600 cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-700 shadow-md rounded-full`}
       >
         <i>
           {isSideBarExpanded ? (

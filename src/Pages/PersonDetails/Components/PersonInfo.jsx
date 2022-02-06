@@ -45,7 +45,6 @@ const PersonInfo = ({ person }) => {
               </span>
             </div>
           </div>
-          <span className="font-bold text-black dark:text-white">Overview</span>
           {/* Overview */}
           <div className="flex flex-col gap-2 w-full mt-3 pr-4 overflow-y-auto scrollbar scrollbar-thin hover:scrollbar-thumb-black scrollbar-thumb-black scrollbar-track-slate-500 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-slate-500">
             <span className="text-sm tracking-wider text-black dark:text-white">
