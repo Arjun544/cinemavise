@@ -52,7 +52,7 @@ const Player = () => {
         mozallowfullscreen="true"
         src={`${
           type === "movie"
-            ? `https://www.2embed.ru/embed/tmdb/movie?id=${id}`
+            ? `https://2embed.org/embed/${id}`
             : `https://www.2embed.ru/embed/tmdb/tv?id=${id}&s=${
                 selectedSeason + 1
               }&e=${selectedEpisode + 1}`
