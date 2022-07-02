@@ -56,11 +56,6 @@ const Player = () => {
             : `https://2embed.org/embed/series?tmdb=${id}&sea=${
                 selectedSeason + 1
               }&epi=${selectedEpisode + 1}`
-
-          // : `https://2embed.org/embed/${id}`
-          // `https://www.2embed.ru/embed/tmdb/tv?id=${id}&s=${
-          //     selectedSeason + 1
-          //   }&e=${selectedEpisode + 1}`
         } `}
         frameBorder="0"
       ></iframe>
